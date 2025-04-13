@@ -42,7 +42,6 @@
         opacity: 0.5;
       }
 
-      /* Assist button */
       #assist-btn {
         position: fixed;
         bottom: 100px;
@@ -62,7 +61,6 @@
         transform: scale(1.05);
       }
 
-      /* Card container */
       .card-container {
         position: fixed;
         bottom: 100px;
@@ -82,7 +80,6 @@
         animation: fadeIn 0.5s ease-in-out;
       }
 
-      /* Shimmer effect */
       .card-container::after {
         content: '';
         position: absolute;
@@ -90,42 +87,14 @@
         left: -75%;
         width: 50%;
         height: 100%;
-        background: linear-gradient(
-          120deg,
-          rgba(255, 255, 255, 0.1) 0%,
-          rgba(255, 255, 255, 0.2) 50%,
-          rgba(255, 255, 255, 0.1) 100%
-        );
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
         transform: skewX(-20deg);
         animation: shimmer 3s infinite;
       }
 
       @keyframes shimmer {
-        0% {
-          left: -75%;
-        }
-        100% {
-          left: 100%;
-        }
-      }
-
-      /* Comet */
-      .comet {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: white;
-        border-radius: 50%;
-        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
-        animation: orbit 8s linear infinite;
-      }
-
-      @keyframes orbit {
-        0%   { transform: translate(0, 0); }
-        25%  { transform: translate(260px, 0); }
-        50%  { transform: translate(260px, 160px); }
-        75%  { transform: translate(0px, 160px); }
-        100% { transform: translate(0, 0); }
+        0% { left: -75%; }
+        100% { left: 100%; }
       }
 
       .card-orbit {
@@ -136,6 +105,21 @@
         height: 160px;
         pointer-events: none;
         z-index: 999;
+        display: none;
+      }
+
+      .card-orbit.active {
+        display: block;
+      }
+
+      .comet {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
+        animation: orbit 8s linear infinite;
       }
 
       .card-orbit:hover .comet {
@@ -143,12 +127,19 @@
         box-shadow: 0 0 35px 15px rgba(255, 255, 255, 0.6);
       }
 
+      @keyframes orbit {
+        0%   { transform: translate(0, 0); }
+        25%  { transform: translate(260px, 0); }
+        50%  { transform: translate(260px, 160px); }
+        75%  { transform: translate(0px, 160px); }
+        100% { transform: translate(0, 0); }
+      }
+
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
         to   { opacity: 1; transform: translateY(0); }
       }
 
-      /* Responsive mobile */
       @media (max-width: 600px) {
         .card-container,
         .card-orbit {
@@ -157,7 +148,6 @@
           width: 90%;
           max-width: 300px;
         }
-
         #assist-btn {
           bottom: 70px;
           right: 12px;
@@ -172,26 +162,19 @@
       A modular system for building task-specific AI agents. <br />
       From research → to prototype → to deployment — all under one cognitive stack.
     </p>
-
     <p>🚀 Launching Q2 2025</p>
-
-    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">
-      📖 Read Founder Log #1
-    </a>
-
-    <footer>
-      chevngko@coreframeai.com · MentalOS-driven · Architecting the future
-    </footer>
-
-    <!-- Comet Track -->
-    <div class="card-orbit">
-      <div class="comet"></div>
-    </div>
+    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">📖 Read Founder Log #1</a>
+    <footer>chevngko@coreframeai.com · MentalOS-driven · Architecting the future</footer>
 
     <!-- Assist Button -->
     <div id="assist-btn" onclick="toggleCard()">🪪 Card</div>
 
-    <!-- Business Card -->
+    <!-- Orbit Glow Only When Active -->
+    <div class="card-orbit" id="orbit">
+      <div class="comet"></div>
+    </div>
+
+    <!-- Card Container -->
     <div class="card-container" id="card">
       <h3>👤 Chevngko</h3>
       <p>Founder & Explorer @ CoreframeAI</p>
@@ -203,21 +186,36 @@
 
     <script>
       const card = document.getElementById("card");
+      const orbit = document.getElementById("orbit");
+      let open = false;
 
       function toggleCard() {
-        card.classList.toggle("active");
+        open = !open;
+        card.classList.toggle("active", open);
+        orbit.classList.toggle("active", open);
       }
 
-      // Mobile swipe-down close
+      // Mobile swipe-down
       let startY = null;
       card.addEventListener("touchstart", (e) => {
         startY = e.touches[0].clientY;
       });
-
       card.addEventListener("touchmove", (e) => {
         if (!startY) return;
-        let diff = e.touches[0].clientY - startY;
-        if (diff > 50) card.classList.remove("active");
+        const diff = e.touches[0].clientY - startY;
+        if (diff > 50) {
+          card.classList.remove("active");
+          orbit.classList.remove("active");
+        }
+      });
+
+      // Desktop click outside to close
+      document.addEventListener("click", function (event) {
+        const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
+        if (!isClickInside) {
+          card.classList.remove("active");
+          orbit.classList.remove("active");
+        }
       });
     </script>
   </body>
