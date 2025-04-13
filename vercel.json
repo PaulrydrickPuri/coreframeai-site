@@ -1,0 +1,10 @@
+{
+    "redirects": [
+      {
+        "source": "/www",
+        "destination": "https://coreframeai.com",
+        "permanent": true
+      }
+    ]
+  }
+  
