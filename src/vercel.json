@@ -1,5 +1,15 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/src/index.html" }
+    {
+      "source": "/",
+      "destination": "/src/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/www",
+      "destination": "https://coreframeai.com",
+      "permanent": true
+    }
   ]
 }
