@@ -131,6 +131,24 @@
       text-decoration: none;
       font-weight: normal;
     }
+
+    .card-toggle {
+    background: #1a1a1a;
+    color: #00ffcc;
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,255,255,0.2);
+    transition: background 0.3s ease;
+    }
+
+    .card-toggle:hover {
+    background: #222;
+    }
+
   </style>
 </head>
 <body>
@@ -147,17 +165,47 @@
     chevngko@coreframeai.com · MentalOS-driven · Architecting the future
   </footer>
 
+  
   <!-- Virtual Business Card -->
-  <div class="card-wrapper">
-    <div class="card-border"><div class="comet"></div></div>
-    <div class="business-card">
+<div class="card-wrapper">
+    <div class="card-toggle" onclick="toggleCard()">
+      📇 Card
+    </div>
+    <div id="card-border" class="card-border">
+      <div class="comet" id="comet"></div>
+    </div>
+    <div id="cardContent" class="business-card">
       <h3>👤 Chevngko</h3>
       <p>Founder & Explorer @ CoreframeAI</p>
       <p>📬 chevngko@coreframeai.com</p>
       <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
       <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
+      <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
     </div>
-  </div>
+</div>
+  
 </body>
+
+<script>
+    function toggleCard() {
+      const card = document.getElementById('cardContent');
+      const comet = document.getElementById('comet');
+      const border = document.getElementById('card-border');
+  
+      if (card.style.display === 'block') {
+        card.style.display = 'none';
+        comet.style.display = 'none';
+      } else {
+        card.style.display = 'block';
+        comet.style.display = 'block';
+      }
+    }
+  
+    // Mobile default collapsed
+    if (window.innerWidth <= 768) {
+      document.getElementById('cardContent').style.display = 'none';
+      document.getElementById('comet').style.display = 'none';
+    }
+  </script>
+  
 </html>
