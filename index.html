@@ -80,7 +80,7 @@
         animation: fadeIn 0.5s ease-in-out;
       }
 
-      .card-container::after {
+      .card-container.active::after {
         content: '';
         position: absolute;
         top: 0;
@@ -90,6 +90,8 @@
         background: linear-gradient(120deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
         transform: skewX(-20deg);
         animation: shimmer 3s infinite;
+        pointer-events: none;
+        border-radius: 16px;
       }
 
       @keyframes shimmer {
@@ -159,7 +161,7 @@
       <p>📬 chevngko@coreframeai.com</p>
       <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
       <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-      <p><a href="https://x.com/chevngko_dEV" target="_blank">👽 X (Twitter)</a></p>
+      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
     </div>
 
     <script>
