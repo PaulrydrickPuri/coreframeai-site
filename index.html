@@ -45,12 +45,12 @@
       opacity: 0.5;
     }
 
+    /* Business Card Container */
     .card-wrapper {
       position: fixed;
       bottom: 24px;
       right: 24px;
       width: 260px;
-      height: 280px;
       z-index: 999;
     }
 
@@ -58,7 +58,7 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      border-radius: 12px;
+      border-radius: 16px;
       z-index: 0;
       pointer-events: none;
     }
@@ -75,7 +75,7 @@
     }
 
     .card-wrapper:hover .comet {
-      animation-duration: 3s; /* Faster on hover */
+      animation-duration: 3s; /* Accelerate on hover */
     }
 
     @keyframes cometTrail {
@@ -104,14 +104,26 @@
       position: relative;
       background: #111;
       color: #fff;
-      padding: 1rem;
-      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      border-radius: 16px;
       font-size: 0.85rem;
       font-family: sans-serif;
-      line-height: 1.4;
+      line-height: 1.5;
       box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
       z-index: 2;
-      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .business-card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .business-card p {
+      margin: 0;
+      font-size: 0.85rem;
     }
 
     .business-card a {
@@ -135,18 +147,16 @@
     chevngko@coreframeai.com · MentalOS-driven · Architecting the future
   </footer>
 
-  <!-- Business Card with Comet Glow -->
+  <!-- Virtual Business Card -->
   <div class="card-wrapper">
-    <div class="card-border">
-      <div class="comet"></div>
-    </div>
+    <div class="card-border"><div class="comet"></div></div>
     <div class="business-card">
       <h3>👤 Chevngko</h3>
       <p>Founder & Explorer @ CoreframeAI</p>
       <p>📬 chevngko@coreframeai.com</p>
       <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
       <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-      <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
+      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
     </div>
   </div>
 </body>
