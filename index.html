@@ -42,65 +42,62 @@
       }
 
       /* Virtual Business Card */
-      #cfai-card {
+      .glow-wrapper {
         position: fixed;
         bottom: 24px;
         right: 24px;
+        width: 260px;
+        height: 300px;
+        z-index: 9999;
+        pointer-events: none;
+      }
+
+      .glow-border {
+        position: absolute;
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+        border-radius: 16px;
+        background: conic-gradient(
+          from 0deg,
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.1)
+        );
+        filter: blur(4px);
+        animation: rotateGlow 4s linear infinite;
+        z-index: -1;
+      }
+
+      @keyframes rotateGlow {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      #cfai-card {
         background-color: #111;
         color: #fff;
         padding: 1rem;
         border-radius: 12px;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
         font-size: 0.85rem;
         font-family: sans-serif;
         line-height: 1.4;
-        z-index: 9999;
-        max-width: 240px;
+        z-index: 2;
+        position: relative;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
+        pointer-events: auto;
       }
+
       #cfai-card a {
         color: #58a6ff;
         text-decoration: none;
         font-weight: normal;
       }
-
-        .card-container {
-    position: relative;
-    border-radius: 1rem;
-    overflow: hidden;
-    background: #111;
-    padding: 1.5rem;
-    color: #fff;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    z-index: 1;
-    }
-
-    .card-container::before {
-    content: '';
-    position: absolute;
-    top: -2px; left: -2px;
-    right: -2px; bottom: -2px;
-    background: conic-gradient(
-        from 0deg,
-        #00ffff,
-        #00ffcc,
-        #ffffff,
-        #00ffff
-    );
-    z-index: -1;
-    animation: rotate-glow 4s linear infinite;
-    border-radius: 1.2rem;
-    filter: blur(6px);
-    }
-
-    @keyframes rotate-glow {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-    }
-
     </style>
   </head>
   <body>
@@ -120,15 +117,17 @@
       chevngko@coreframeai.com · MentalOS-driven · Architecting the future
     </footer>
 
-    <!-- Virtual Business Card -->
-    <div class="card-container">
+    <!-- Virtual Business Card Glow -->
+    <div class="glow-wrapper">
+      <div class="glow-border"></div>
+      <div id="cfai-card">
         <h3>👤 Chevngko</h3>
         <p>Founder & Explorer @ CoreframeAI</p>
         <p>📬 chevngko@coreframeai.com</p>
         <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
         <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-        <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
+        <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
       </div>
-      
+    </div>
   </body>
 </html>
