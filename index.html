@@ -38,13 +38,22 @@
       }
       footer {
         margin-top: 2rem;
-        font-size: 0.75rem;
-        opacity: 0.5;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+        animation: scroll-left 30s linear infinite;
+      }
+
+      @keyframes scroll-left {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
       }
 
       #assist-btn {
         position: fixed;
-        bottom: 100px;
+        bottom: 160px;
         right: 24px;
         background: #0e0e0e;
         border: 2px solid #00ffee;
@@ -85,21 +94,20 @@
         content: '';
         position: absolute;
         top: 0;
-        left: 0;
-        width: 100%;
+        left: -75%;
+        width: 50%;
         height: 100%;
         background: linear-gradient(120deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
         transform: skewX(-20deg);
         animation: shimmer 3s infinite;
         pointer-events: none;
         border-radius: 16px;
-        overflow: hidden;
         clip-path: inset(0 round 16px);
       }
 
       @keyframes shimmer {
-        0% { transform: translateX(-75%) skewX(-20deg); }
-        100% { transform: translateX(100%) skewX(-20deg); }
+        0% { left: -75%; }
+        100% { left: 100%; }
       }
 
       .comet {
@@ -138,7 +146,7 @@
           max-width: 300px;
         }
         #assist-btn {
-          bottom: 70px;
+          bottom: 130px;
           right: 12px;
           padding: 0.6rem 1rem;
         }
@@ -153,7 +161,10 @@
     </p>
     <p>🚀 Launching Q2 2025</p>
     <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">📖 Read Founder Log #1</a>
-    <footer>chevngko@coreframeai.com · MentalOS-driven · Architecting the future</footer>
+
+    <footer>
+      chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents > Prompts > Prototypes > Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not Human-in-the-Way
+    </footer>
 
     <div id="assist-btn" onclick="toggleCard()">🪪 Card</div>
 
@@ -176,7 +187,6 @@
         card.classList.toggle("active", open);
       }
 
-      // Mobile swipe-down
       let startY = null;
       card.addEventListener("touchstart", (e) => {
         startY = e.touches[0].clientY;
@@ -189,7 +199,6 @@
         }
       });
 
-      // Desktop click outside to close
       document.addEventListener("click", function (event) {
         const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
         if (!isClickInside) {
