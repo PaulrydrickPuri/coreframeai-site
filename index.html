@@ -1,133 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CoreframeAI</title>
-    <style>
-      body {
-        background: #0e0e0e;
-        color: #f1f1f1;
-        font-family: system-ui, sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        text-align: center;
-        margin: 0;
-        padding: 0 2rem;
-      }
-      h1 {
-        font-size: 3rem;
-        margin-bottom: 0.5rem;
-      }
-      p {
-        max-width: 600px;
-        font-size: 1.1rem;
-        line-height: 1.6;
-        opacity: 0.85;
-      }
-      a {
-        color: #00ffcc;
-        text-decoration: none;
-        font-weight: bold;
-        margin-top: 1.5rem;
-        display: inline-block;
-      }
-      footer {
-        margin-top: 2rem;
-        font-size: 0.75rem;
-        opacity: 0.5;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CoreframeAI</title>
+  <style>
+    body {
+      background: #0e0e0e;
+      color: #f1f1f1;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      margin: 0;
+      padding: 0 2rem;
+    }
 
-      /* Virtual Business Card */
-      .glow-wrapper {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 260px;
-        height: 300px;
-        z-index: 9999;
-        pointer-events: none;
-      }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
 
-      .glow-border {
-        position: absolute;
-        top: -4px;
-        left: -4px;
-        right: -4px;
-        bottom: -4px;
-        border-radius: 16px;
-        background: conic-gradient(
-          from 0deg,
-          rgba(255, 255, 255, 0.1),
-          rgba(255, 255, 255, 0.8),
-          rgba(255, 255, 255, 0.1)
-        );
-        filter: blur(4px);
-        animation: rotateGlow 4s linear infinite;
-        z-index: -1;
-      }
+    p {
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      opacity: 0.85;
+    }
 
-      @keyframes rotateGlow {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
+    a {
+      color: #00ffcc;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1.5rem;
+      display: inline-block;
+    }
 
-      #cfai-card {
-        background-color: #111;
-        color: #fff;
-        padding: 1rem;
-        border-radius: 12px;
-        font-size: 0.85rem;
-        font-family: sans-serif;
-        line-height: 1.4;
-        z-index: 2;
-        position: relative;
-        box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-        pointer-events: auto;
-      }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
 
-      #cfai-card a {
-        color: #58a6ff;
-        text-decoration: none;
-        font-weight: normal;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🧠 CoreframeAI</h1>
-    <p>
-      A modular system for building task-specific AI agents. <br />
-      From research → to prototype → to deployment — all under one cognitive stack.
-    </p>
+    .card-wrapper {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 260px;
+      height: 280px;
+      z-index: 999;
+    }
 
-    <p>🚀 Launching Q2 2025</p>
+    .card-border {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      z-index: 0;
+      pointer-events: none;
+    }
 
-    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">
-      📖 Read Founder Log #1
-    </a>
+    .comet {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 15px 8px rgba(255,255,255,0.6);
+      animation: cometTrail 8s linear infinite;
+      filter: blur(1px);
+    }
 
-    <footer>
-      chevngko@coreframeai.com · MentalOS-driven · Architecting the future
-    </footer>
+    .card-wrapper:hover .comet {
+      animation-duration: 3s; /* Faster on hover */
+    }
 
-    <!-- Virtual Business Card Glow -->
-    <div class="glow-wrapper">
-      <div class="glow-border"></div>
-      <div id="cfai-card">
-        <h3>👤 Chevngko</h3>
-        <p>Founder & Explorer @ CoreframeAI</p>
-        <p>📬 chevngko@coreframeai.com</p>
-        <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
-        <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-        <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
-      </div>
+    @keyframes cometTrail {
+      0%   { top: 0; left: 0; }
+      25%  { top: 0; left: 100%; transform: translate(-100%, 0); }
+      50%  { top: 100%; left: 100%; transform: translate(-100%, -100%); }
+      75%  { top: 100%; left: 0; transform: translate(0, -100%); }
+      100% { top: 0; left: 0; }
+    }
+
+    .comet::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.2), transparent 70%);
+      border-radius: 50%;
+      transform: scale(1.5);
+      filter: blur(8px);
+      top: -5px;
+      left: -5px;
+      z-index: -1;
+    }
+
+    .business-card {
+      position: relative;
+      background: #111;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-family: sans-serif;
+      line-height: 1.4;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+      z-index: 2;
+      height: 100%;
+    }
+
+    .business-card a {
+      color: #58a6ff;
+      text-decoration: none;
+      font-weight: normal;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 CoreframeAI</h1>
+  <p>
+    A modular system for building task-specific AI agents. <br />
+    From research → to prototype → to deployment — all under one cognitive stack.
+  </p>
+  <p>🚀 Launching Q2 2025</p>
+  <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">
+    📖 Read Founder Log #1
+  </a>
+  <footer>
+    chevngko@coreframeai.com · MentalOS-driven · Architecting the future
+  </footer>
+
+  <!-- Business Card with Comet Glow -->
+  <div class="card-wrapper">
+    <div class="card-border">
+      <div class="comet"></div>
     </div>
-  </body>
+    <div class="business-card">
+      <h3>👤 Chevngko</h3>
+      <p>Founder & Explorer @ CoreframeAI</p>
+      <p>📬 chevngko@coreframeai.com</p>
+      <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
+      <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
+      <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
+    </div>
+  </div>
+</body>
 </html>
