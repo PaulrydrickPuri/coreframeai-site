@@ -17,17 +17,21 @@
         text-align: center;
         margin: 0;
         padding: 0 2rem;
+        overflow-x: hidden;
       }
+
       h1 {
         font-size: 3rem;
         margin-bottom: 0.5rem;
       }
+
       p {
         max-width: 600px;
         font-size: 1.1rem;
         line-height: 1.6;
         opacity: 0.85;
       }
+
       a {
         color: #00ffcc;
         text-decoration: none;
@@ -35,119 +39,154 @@
         margin-top: 1.5rem;
         display: inline-block;
       }
+
       footer {
         margin-top: 2rem;
         font-size: 0.75rem;
         opacity: 0.5;
       }
 
-      #card-button {
+      /* Floating Comet Effect */
+      .comet {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+        animation: cometPath 6s linear infinite;
+        will-change: transform;
+      }
+
+      .card-container:hover .comet {
+        animation-duration: 2.5s;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+      }
+
+      @keyframes cometPath {
+        0% { transform: translate(0, 0); }
+        25% { transform: translate(100%, 0); }
+        50% { transform: translate(100%, 100%); }
+        75% { transform: translate(0, 100%); }
+        100% { transform: translate(0, 0); }
+      }
+
+      /* Floating Card Button */
+      #card-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+        background: #1a1a1a;
+        color: #00ffcc;
+        font-size: 1.5rem;
+        border: 1px solid #00ffcc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+        cursor: pointer;
+        z-index: 10000;
+      }
+
+      .card-container {
         display: none;
         position: fixed;
-        bottom: 24px;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 0.75rem 1.25rem;
-        background: #1f1f1f;
-        border-radius: 10px;
-        font-size: 1rem;
-        color: #00ffcc;
-        font-weight: bold;
-        border: 1px solid #00ffcc;
-        box-shadow: 0 0 20px rgba(0, 255, 204, 0.2);
-        z-index: 10000;
-        cursor: pointer;
+        bottom: 80px;
+        right: 20px;
+        background: #111;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        color: #fff;
+        width: 260px;
+        max-width: 90vw;
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+        z-index: 9999;
+      }
+
+      .card-container.shimmer::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shimmer 2s infinite;
+        border-radius: 1rem;
+      }
+
+      @keyframes shimmer {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
       }
 
       @media (max-width: 768px) {
-        #cfai-card {
-          display: none;
-        }
-
-        #cfai-card.show {
-          display: block;
-          position: fixed;
-          bottom: 90px;
+        .card-container {
+          width: 92vw;
           left: 50%;
           transform: translateX(-50%);
-          width: 90%;
-          max-width: 340px;
-        }
-
-        #card-button {
-          display: block;
+          bottom: 100px;
         }
       }
 
-      #cfai-card {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        background: #111;
-        color: #fff;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        font-family: sans-serif;
-        z-index: 9999;
-        max-width: 260px;
-        overflow: hidden;
-      }
-
-      #cfai-card .comet {
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        background: white;
-        border-radius: 50%;
-        box-shadow: 0 0 20px 8px rgba(255, 255, 255, 0.6);
-        animation: cometOrbit 6s linear infinite;
-        z-index: -1;
-      }
-
-      #cfai-card:hover .comet {
-        animation-duration: 2s;
-      }
-
-      @keyframes cometOrbit {
-        0%   { top: -10px; left: -10px; }
-        25%  { top: -10px; right: -10px; left: auto; }
-        50%  { bottom: -10px; right: -10px; top: auto; left: auto; }
-        75%  { bottom: -10px; left: -10px; top: auto; right: auto; }
-        100% { top: -10px; left: -10px; bottom: auto; right: auto; }
-      }
-
-      #cfai-card a {
-        color: #58a6ff;
-        text-decoration: none;
-        display: block;
-        margin: 0.3rem 0;
-      }
     </style>
   </head>
   <body>
     <h1>🧠 CoreframeAI</h1>
-    <p>A modular system for building task-specific AI agents.<br />From research → to prototype → to deployment — all under one cognitive stack.</p>
-    <p>🚀 Launching Q2 2025</p>
-    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">📖 Read Founder Log #1</a>
-    <footer>chevngko@coreframeai.com · MentalOS-driven · Architecting the future</footer>
+    <p>
+      A modular system for building task-specific AI agents. <br />
+      From research → to prototype → to deployment — all under one cognitive stack.
+    </p>
 
-    <div id="cfai-card">
+    <p>🚀 Launching Q2 2025</p>
+
+    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">
+      📖 Read Founder Log #1
+    </a>
+
+    <footer>
+      chevngko@coreframeai.com · MentalOS-driven · Architecting the future
+    </footer>
+
+    <!-- Toggle Button -->
+    <div id="card-toggle">🪪</div>
+
+    <!-- Comet glow inside card -->
+    <div class="card-container" id="cfai-card">
       <div class="comet"></div>
       <h3>👤 Chevngko</h3>
       <p>Founder & Explorer @ CoreframeAI</p>
       <p>📬 chevngko@coreframeai.com</p>
-      <a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a>
-      <a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a>
-      <a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a>
+      <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
+      <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
+      <p><a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a></p>
     </div>
 
-    <div id="card-button" onclick="toggleCard()">🪪 Card</div>
-
     <script>
-      function toggleCard() {
-        const card = document.getElementById('cfai-card');
-        card.classList.toggle('show');
-      }
+      const toggle = document.getElementById("card-toggle");
+      const card = document.getElementById("cfai-card");
+      let isOpen = false;
+
+      toggle.addEventListener("click", () => {
+        isOpen = !isOpen;
+        card.style.display = isOpen ? "block" : "none";
+        if (isOpen) card.classList.add("shimmer");
+        else card.classList.remove("shimmer");
+      });
+
+      // Swipe down to close (mobile)
+      let touchStartY = 0;
+      card.addEventListener("touchstart", (e) => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      card.addEventListener("touchmove", (e) => {
+        if (e.touches[0].clientY - touchStartY > 60) {
+          card.style.display = "none";
+          isOpen = false;
+        }
+      });
     </script>
   </body>
 </html>
