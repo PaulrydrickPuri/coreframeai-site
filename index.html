@@ -17,7 +17,6 @@
         text-align: center;
         margin: 0;
         padding: 0 2rem;
-        overflow: hidden;
       }
       h1 {
         font-size: 3rem;
@@ -42,115 +41,141 @@
         opacity: 0.5;
       }
 
-      /* Card container */
-      .card-container {
+      #card-toggle {
         position: fixed;
-        bottom: 24px;
-        right: 24px;
+        bottom: 80px;
+        right: 20px;
+        background: #111;
+        border: 1px solid #00ffcc;
+        border-radius: 50%;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #00ffcc;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+      }
+
+      #cfai-card {
+        position: fixed;
+        bottom: 100px;
+        right: 20px;
         background-color: #111;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
-        z-index: 999;
-        width: 260px;
-        font-size: 0.85rem;
+        color: #fff;
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        font-size: 0.9rem;
         font-family: sans-serif;
         line-height: 1.4;
-        color: #fff;
-      }
-      .card-container a {
-        color: #58a6ff;
-        text-decoration: none;
-        display: block;
-        margin-top: 0.5rem;
+        max-width: 280px;
+        z-index: 9999;
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
       }
 
-      /* Comet Trail */
-      .comet {
+      #cfai-card.shimmer::after {
+        content: '';
         position: absolute;
-        width: 12px;
-        height: 12px;
-        background: white;
-        border-radius: 50%;
-        box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.2);
-        animation: cometOrbit 6s linear infinite;
-        z-index: 998;
-      }
-      .card-wrapper {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 260px;
-        height: 180px;
-        z-index: 997;
+        top: 0;
+        left: -50%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+        animation: shimmer 2s infinite;
       }
 
-      @keyframes cometOrbit {
-        0% {
-          top: 0%; left: 0%;
-        }
-        25% {
-          top: 0%; left: 100%;
-        }
-        50% {
-          top: 100%; left: 100%;
-        }
-        75% {
-          top: 100%; left: 0%;
-        }
-        100% {
-          top: 0%; left: 0%;
-        }
+      @keyframes shimmer {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(100%); }
       }
 
-      .card-container:hover ~ .comet {
-        animation-duration: 2s;
-        box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.3);
+      .glow-trace {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-radius: 12px;
+        box-shadow: 0 0 8px 4px rgba(255, 255, 255, 0.15);
+        animation: orbit 8s linear infinite;
+        z-index: -1;
       }
 
-      /* Mobile adjustments */
+      @keyframes orbit {
+        0% { transform: translate(0%, 0%) rotate(0deg); }
+        100% { transform: translate(0%, 0%) rotate(360deg); }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
       @media (max-width: 768px) {
-        .card-container {
-          bottom: 80px;
+        #cfai-card {
+          bottom: 120px;
           right: 16px;
-          width: 220px;
-          padding: 1rem;
+          left: 16px;
+          width: auto;
+          font-size: 1rem;
+          border-radius: 16px;
         }
-        .card-wrapper {
-          width: 220px;
-          height: 160px;
+        #card-toggle {
+          bottom: 40px;
+          right: 20px;
         }
       }
     </style>
   </head>
   <body>
     <h1>🧠 CoreframeAI</h1>
-    <p>
-      A modular system for building task-specific AI agents. <br />
-      From research → to prototype → to deployment — all under one cognitive stack.
-    </p>
-
+    <p>A modular system for building task-specific AI agents.<br />
+    From research → to prototype → to deployment — all under one cognitive stack.</p>
     <p>🚀 Launching Q2 2025</p>
+    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">📖 Read Founder Log #1</a>
+    <footer>chevngko@coreframeai.com · MentalOS-driven · Architecting the future</footer>
 
-    <a href="https://medium.com/@chevngko/founder-log-1-the-week-i-realized-vision-models-can-think-d9faef15a11c" target="_blank">
-      📖 Read Founder Log #1
-    </a>
+    <div id="card-toggle" onclick="toggleCard()">💳</div>
 
-    <footer>
-      chevngko@coreframeai.com · MentalOS-driven · Architecting the future
-    </footer>
-
-    <!-- Business Card + Comet wrapper -->
-    <div class="card-wrapper">
-      <div class="card-container">
-        <h3>👤 Chevngko</h3>
-        <p>Founder & Explorer @ CoreframeAI</p>
-        <p>📬 chevngko@coreframeai.com</p>
-        <a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a>
-        <a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a>
-        <a href="https://x.com/chevngko_dev" target="_blank">👽 X (Twitter)</a>
-      </div>
-      <div class="comet"></div>
+    <div id="cfai-card">
+      <div class="glow-trace"></div>
+      <h3>👤 Chevngko</h3>
+      <p>Founder & Explorer @ CoreframeAI</p>
+      <p>📬 chevngko@coreframeai.com</p>
+      <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
+      <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
+      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
     </div>
+
+    <script>
+      const card = document.getElementById('cfai-card');
+      const toggle = document.getElementById('card-toggle');
+      let touchStartY = 0;
+
+      function toggleCard() {
+        if (card.style.display === 'block') {
+          card.style.display = 'none';
+        } else {
+          card.classList.add('shimmer');
+          card.style.display = 'block';
+        }
+      }
+
+      // Swipe down to close
+      card.addEventListener('touchstart', e => {
+        touchStartY = e.touches[0].clientY;
+      });
+
+      card.addEventListener('touchend', e => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (touchEndY - touchStartY > 50) {
+          card.style.display = 'none';
+        }
+      });
+    </script>
   </body>
 </html>
