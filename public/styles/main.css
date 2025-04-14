@@ -1,3 +1,38 @@
+/* main.css — Staging-1 (Single CTA only) */
+
+body {
+  background: #0e0e0e;
+  color: #f1f1f1;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  min-height: 100vh;
+  text-align: center;
+  margin: 0;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+a {
+  color: #00ffee;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* === AgentBanner === */
 .agent-banner {
   border: 1px solid #222;
   background: #111;
@@ -9,11 +44,6 @@
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.08);
   animation: pulseShadow 15s ease-in-out infinite, fadeIn 0.8s ease-in-out;
 }
-@keyframes pulseShadow {
-  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.08); }
-  50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.12); }
-}
-
 
 .agent-banner h2 {
   font-size: 1.6rem;
@@ -39,40 +69,33 @@
   line-height: 1.6;
 }
 
-.agent-banner div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+.agent-banner .cta-single {
+  display: inline-block;
+  margin-top: 1rem;
 }
 
-.agent-banner a {
-  padding: 0.5rem 1.2rem;
+.agent-banner .cta-single a {
+  padding: 0.6rem 1.2rem;
   background: #000;
   border: 1px solid #00ffee;
   color: #00ffee;
   border-radius: 6px;
-  transition: all 0.3s ease;
   font-size: 0.95rem;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+  transition: all 0.3s ease;
 }
 
-.agent-banner a:hover {
-  /* 🧘 No hover jump in teaser mode */
-  transform: translateY(0px) rotate(0deg);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.08), 0 0 10px rgba(0, 255, 255, 0.25);
+.agent-banner .cta-single a:hover {
+  transform: none;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.25);
 }
 
-.scroll-cue {
-  margin-top: 1.5rem;
-  font-size: 0.95rem;
-  color: #aaa;
-  animation: floatFade 2s ease-in-out infinite;
-  cursor: pointer;
+@keyframes pulseShadow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 255, 0.08); }
+  50% { box-shadow: 0 0 40px rgba(0, 255, 255, 0.12); }
 }
 
-@keyframes floatFade {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(6px); opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
