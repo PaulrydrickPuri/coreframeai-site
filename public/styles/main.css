@@ -271,6 +271,22 @@ a {
   text-align: center;
 }
 
+.mvp-section pre {
+  background: #1f1f1f;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  margin: 1.5rem auto;
+  text-align: left;
+  color: #f1f1f1;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.95rem;
+  display: inline-block;
+  white-space: pre;
+  line-height: 1.6;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.05);
+  max-width: 90%;
+}
+
 .mvp-section h2 {
   font-size: 1.3rem;
   color: #00ffee;
@@ -283,18 +299,12 @@ a {
   opacity: 0.9;
 }
 
-code, pre {
+.mvp-section code {
   background: #1f1f1f;
-  padding: 1rem;
-  border-radius: 8px;
-  margin: 0 auto 2rem;
-  text-align: center;
-  color: #f1f1f1;
-  display: inline-block;
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
   font-family: monospace;
-  font-size: 0.95rem;
-  white-space: pre-wrap;
-  max-width: 90%;
+  font-size: 0.9rem;
 }
 
 .roadmap {
