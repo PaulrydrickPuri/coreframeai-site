@@ -1,83 +1,93 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CoreframeAI</title>
-<link href="/styles/main.css" rel="stylesheet"/>
-</head>
-<body>
-<h1>🧠 CoreframeAI</h1>
-<p>A modular system for building task-specific AI agents. <br/>From research → to prototype → to deployment — all under one cognitive stack.</p>
-<p>🚀 Phase 1 Launch: Q2 2025<br/>🔁 CoreframeAI is rolling out cognition-first agents, one prototype at a time.</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CoreframeAI</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+  </head>
+  <body>
+    <h1>🧠 CoreframeAI</h1>
+    <p>
+      A modular system for building task-specific AI agents. <br />
+      From research → to prototype → to deployment — all under one cognitive stack.
+    </p>
+    <p>🚀 Phase 1 Launch: Q2 2025<br />🧠 CoreframeAI is rolling out cognition-first agents, one prototype at a time.</p>
 
-<a href="#agent-labeless" class="scroll-cue">↓ Meet the Agent</a>
+    <!-- Scroll Cue to Agent Section -->
+    <a href="#agent-labeless" class="scroll-cue">↓ Meet the Agent</a>
 
-<section id="agent-labeless" class="agent-banner">
-  <h2>🎯 Meet AgentLabeless <span class="badge-new">NEW</span></h2>
-  <p>
-    A prompt-powered vision agent that labels like you do — 
-    with <strong>context</strong>, not <strong>coordinates</strong>.
-  </p>
-  <div>
-    <a href="https://agentlabeless.coreframeai.com" target="_blank">🚀 Try AgentLabeless</a>
-    <a href="https://medium.com/@paulrydrickpuri/founder-log-1-the-week-i-realized-vision-models-can-think-b62e6bdb1385" target="_blank">📓 Read the MVP Story</a>
-  </div>
-</section>
+    <!-- AgentLabeless Identity Banner -->
+    <section id="agent-labeless" class="agent-banner">
+      <h2>🎯 Meet AgentLabeless <span class="badge-new">NEW</span></h2>
+      <p>
+        A prompt-powered vision agent that labels like you do —
+        with <strong>context</strong>, not <strong>coordinates</strong>.
+      </p>
+      <div>
+        <a href="https://agentlabeless.coreframeai.com" target="_blank">🚀 Try AgentLabeless</a>
+        <a href="https://medium.com/@paulrydrickpuri/founder-log-1-the-week-i-realized-vision-models-can-think-b62e6bdb1385" target="_blank">📓 Read the MVP Story</a>
+      </div>
+    </section>
 
-<div id="assist-btn" onclick="toggleCard()">🪪</div>
-<div class="card-container" id="card">
-  <div class="comet"></div>
-  <h3>👤 Chevngko</h3>
-  <p>Founder & Explorer @ CoreframeAI</p>
-  <p>📬 chevngko@coreframeai.com</p>
-  <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
-  <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
-  <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
-</div>
-
-<div class="footer-carousel" id="footer">
-<div class="footer-carousel-track">
-      chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents &gt; Prompts &gt; Prototypes &gt; Products · Less Labeling, More Learning · Human-in-the-Loop, Not Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks · Compose Cognitive Pipelines · Prototype smarter · Prompt with purpose ·
+    <!-- Footer Carousel -->
+    <div class="footer-carousel" id="footer">
+      <div class="footer-carousel-track">
+        chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents > Prompts > Prototypes > Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks ·
+      </div>
     </div>
-</div>
-<script>
-  const card = document.getElementById("card");
-  const footer = document.getElementById("footer");
-  let open = false;
 
-  function toggleCard() {
-    open = !open;
-    card.classList.toggle("active", open);
-  }
+    <!-- Virtual Business Card Button -->
+    <div id="assist-btn" onclick="toggleCard()">🪪</div>
 
-  let startY = null;
-  card.addEventListener("touchstart", (e) => {
-    startY = e.touches[0].clientY;
-  });
-  card.addEventListener("touchmove", (e) => {
-    if (!startY) return;
-    const diff = e.touches[0].clientY - startY;
-    if (diff > 50) {
-      card.classList.remove("active");
-      open = false;
-    }
-  });
+    <!-- Business Card -->
+    <div class="card-container" id="card">
+      <div class="comet"></div>
+      <h3>👤 Chevngko</h3>
+      <p>Founder & Explorer @ CoreframeAI</p>
+      <p>📬 chevngko@coreframeai.com</p>
+      <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
+      <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
+      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
+    </div>
 
-  document.addEventListener("click", function (event) {
-    const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
-    if (!isClickInside) {
-      card.classList.remove("active");
-      open = false;
-    }
-  });
+    <!-- Scripts -->
+    <script>
+      const card = document.getElementById("card");
+      const footer = document.getElementById("footer");
+      let open = false;
 
-  footer.addEventListener("mouseenter", () => footer.classList.add("paused"));
-  footer.addEventListener("mouseleave", () => footer.classList.remove("paused"));
-  footer.addEventListener("touchstart", () => {
-    footer.classList.toggle("paused");
-  });
-</script></body>
+      function toggleCard() {
+        open = !open;
+        card.classList.toggle("active", open);
+      }
+
+      let startY = null;
+      card.addEventListener("touchstart", (e) => {
+        startY = e.touches[0].clientY;
+      });
+      card.addEventListener("touchmove", (e) => {
+        if (!startY) return;
+        const diff = e.touches[0].clientY - startY;
+        if (diff > 50) {
+          card.classList.remove("active");
+          open = false;
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
+        if (!isClickInside) {
+          card.classList.remove("active");
+          open = false;
+        }
+      });
+
+      footer.addEventListener("mouseenter", () => footer.classList.add("paused"));
+      footer.addEventListener("mouseleave", () => footer.classList.remove("paused"));
+      footer.addEventListener("touchstart", () => {
+        footer.classList.toggle("paused");
+      });
+    </script>
+  </body>
 </html>
