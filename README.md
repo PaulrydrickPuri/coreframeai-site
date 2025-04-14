@@ -1,47 +1,63 @@
-# 🧠 CoreframeAI
+# 🧠 CoreframeAI — Home of Modular AI Agents
 
-> Not just an interface — a cognitive system.
-
-CoreframeAI is a modular platform for building cognition-first AI agents.  
-From research → to prototype → to deployment — all under one unified cognitive stack.
+Welcome to **CoreframeAI**, a unified platform for intelligent agents—each crafted with a focused role, modular brain, and human-in-the-loop design. Built by [@chevngko](https://linktr.ee/chevngko).
 
 ---
 
-## 🛍 Project Pillars
+## 🚀 Featured Agent
 
-- **Modular Cognition**: Every component is task-specific, decoupled, and reusable.
-- **MentalOS**: A mental operating system to guide developer thinking, creativity, and momentum.
-- **Human-in-the-Loop**: Agents that amplify, not automate, your decision flow.
-- **Label-Free Learning**: Conceptual intelligence over hard-coded labels.
-- **Composable AI Pipelines**: Built like cognitive architecture, not monolithic endpoints.
+### 🎯 AgentLabeless — Label by Concept, Not Click
+**Type**: Vision-Language Labeling Agent  
+**Mode**: Few-shot · Prompt-driven · CLIP + Concept-Attention (v1)  
 
----
+| Version | Engine | Purpose |
+|---------|--------|---------|
+| v0 | CLIP | MVP: Prompt-only concept labeling |
+| v1 | Kimi-VL + SAM | Object-level segmentation + reasoning |
 
-## 🚀 Phase 1: Public Launch
-
-- 🌍 Live site: [coreframeai.com](https://coreframeai.com)
-- 📖 Read the [Founder Log #1](https://medium.com/@paulrydrickpuri/founder-log-1-the-week-i-realized-vision-models-can-think-b62e6bdb1385)
+🔗 [View the AgentLabeless repo →](https://github.com/PaulrydrickPuri/agentlabeless)
 
 ---
 
-## 🗂 Project Structure
+## 🧩 What is CoreframeAI?
+CoreframeAI is not one big agent—it’s a **frame** where agents specialize, evolve, and operate in modular fashion.
 
-```
-coreframeai-site/
-├── docs/              # MentalOS philosophy, roadmap, FAQs
-├── public/            # Static assets (images, video, favicon)
-├── src/               # HTML agents, core prototypes
-│   └── agents/
-├── styles/            # CSS
-├── README.md
-└── vercel.json
-```
+### Agents Coming Soon:
+- **AgentLabeless** — for dataset prep, annotation, concept-matching
+- **AgentNarrate** — for vision-to-text storytelling
+- **AgentFilter** — for active learning, label review, dataset pruning
+
+Each agent:
+- Has a **focused job**
+- Is **prompt-friendly and editable**
+- Runs in **low-latency MVP mode** or **advanced mode** (CoT, RAG, ConceptAttention)
 
 ---
 
-## 👨‍💻 Join the Movement
+## 📦 Deployable Agents (Plug + Play)
+Every agent is:
+- Hosted in its own folder/repo
+- Exportable via Streamlit Cloud or Hugging Face Spaces
+- Installable in minutes for public or private use
 
-This is only the beginning.  
-We’re building agents that think, explain, and evolve — not just output.
+---
 
-> 🔁 CoreframeAI · Agents > Prompts > Prototypes > Products · Human-in-the-loop, not human-in-the-way.
+## 🌱 Vision
+**We believe agents should be…**
+- **Human-extendable** (you show it 5 images, it learns)
+- **Prompt-first** (no more GUIs to drag boxes)
+- **Lightweight and modular** (no monoliths)
+
+> **CoreframeAI** is where fast ideas become lasting agents.
+
+---
+
+## 🧠 Built by [@chevngko](https://linktr.ee/chevngko)
+Founder, builder, prompt engineer, vision enthusiast. 
+> Building intelligent systems that learn the way we do.
+
+---
+
+## 📬 Contact / Collab
+Have an idea for an agent? Want to fork AgentLabeless?
+DM via [Twitter/X](https://twitter.com/chevngko) or [LinkedIn](https://www.linkedin.com/in/chevngko)
