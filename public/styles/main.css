@@ -99,7 +99,7 @@ a {
 }
 
 .agent-banner a:hover {
-  transform: translateY(-2px) rotate(-1deg);
+  transform: translateY(0px) rotate(0deg);
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.08), 0 0 10px rgba(0, 255, 255, 0.25);
 }
 
