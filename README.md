@@ -2,6 +2,8 @@
 
 Welcome to **CoreframeAI**, a unified platform for intelligent agents—each crafted with a focused role, modular brain, and human-in-the-loop design. Built by [@chevngko](https://linktr.ee/chevngko).
 
+> 🚧 **Staging Preview Activated** — This version is for internal testing only. Not final.
+
 ---
 
 ## 🚀 Featured Agent
@@ -19,7 +21,7 @@ Welcome to **CoreframeAI**, a unified platform for intelligent agents—each cra
 
 ---
 
-## 🧩 What is CoreframeAI?
+## 🧹 What is CoreframeAI?
 CoreframeAI is not one big agent—it’s a **frame** where agents specialize, evolve, and operate in modular fashion.
 
 ### Agents Coming Soon:
