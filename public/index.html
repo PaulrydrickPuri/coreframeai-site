@@ -8,25 +8,68 @@
   </head>
   <body>
     <h1>🧠 CoreframeAI</h1>
-    <p>A modular system for building task-specific AI agents.<br />
-      From research → to prototype → to deployment — all under one cognitive stack.</p>
-    <p>🚀 Phase 1 Launch: Q2 2025<br />
-      🧠 CoreframeAI is rolling out cognition-first agents, one prototype at a time.</p>
-    <a href="#" style="color: #00f7ff; font-weight: bold;">📖 Read Founder Log #1</a>
+    <p>
+      A modular system for building task-specific AI agents. <br />
+      From research → to prototype → to deployment — all under one cognitive stack.
+    </p>
+    <p>🚀 Phase 1 Launch: Q2 2025<br>🔁 CoreframeAI is rolling out cognition-first agents, one prototype at a time.</p>
 
-    <section class="agent-card">
-      <h2>🎯 AgentLabeless</h2>
-      <p><strong>Label by Concept, Not Click.</strong></p>
-      <p>A few-shot, CLIP-powered vision agent that turns your prompts and 5–10 example images into ready-to-use YOLO annotations. No GUI bounding boxes. Just precision and logic.</p>
-      <ul>
-          <li>⚡ Prompt-driven zero-shot labeling</li>
-          <li>🧠 CLIP + ConceptAttention roadmap</li>
-          <li>📦 Exports YOLO format labels in seconds</li>
-      </ul>
-      <div class="button-group">
-        <a href="https://agentlabeless.coreframeai.com" target="_blank">🖋️ Try AgentLabeless</a>
-        <a href="https://github.com/PaulrydrickPuri/agentlabeless" target="_blank">📂 View Source Code</a>
+    <a href="https://medium.com/@paulrydrickpuri/founder-log-1-the-week-i-realized-vision-models-can-think-b62e6bdb1385" target="_blank">📖 Read Founder Log #1</a>
+
+    <div class="footer-carousel" id="footer">
+      <div class="footer-carousel-track">
+        chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents > Prompts > Prototypes > Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not Human-in-the-Way · 
       </div>
-    </section>
+    </div>
+
+    <div id="assist-btn" onclick="toggleCard()">🪪</div>
+
+    <div class="card-container" id="card">
+      <div class="comet"></div>
+      <h3>👤 Chevngko</h3>
+      <p>Founder & Explorer @ CoreframeAI</p>
+      <p>📬 chevngko@coreframeai.com</p>
+      <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
+      <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
+      <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
+    </div>
+
+    <script>
+      const card = document.getElementById("card");
+      const footer = document.getElementById("footer");
+      let open = false;
+
+      function toggleCard() {
+        open = !open;
+        card.classList.toggle("active", open);
+      }
+
+      let startY = null;
+      card.addEventListener("touchstart", (e) => {
+        startY = e.touches[0].clientY;
+      });
+      card.addEventListener("touchmove", (e) => {
+        if (!startY) return;
+        const diff = e.touches[0].clientY - startY;
+        if (diff > 50) {
+          card.classList.remove("active");
+          open = false;
+        }
+      });
+
+      document.addEventListener("click", function (event) {
+        const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
+        if (!isClickInside) {
+          card.classList.remove("active");
+          open = false;
+        }
+      });
+
+      footer.addEventListener("mouseenter", () => footer.classList.add("paused"));
+      footer.addEventListener("mouseleave", () => footer.classList.remove("paused"));
+      footer.addEventListener("touchstart", () => {
+        footer.classList.toggle("paused");
+      });
+    </script>
   </body>
 </html>
