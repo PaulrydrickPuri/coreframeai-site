@@ -14,44 +14,41 @@
     </p>
     <p>🚀 Phase 1 Launch: Q2 2025<br />🧠 CoreframeAI is rolling out cognition-first agents, one prototype at a time.</p>
 
-    <!-- Scroll Cue to Agent Section -->
-    <a href="#agent-labeless" class="scroll-cue">↓ Meet the Agent</a>
+    <!-- ↓ CTA Scroll Cue -->
+    <div class="scroll-cue">↓ Meet the Agent</div>
 
-    <!-- AgentLabeless Identity Banner -->
-    <section id="agent-labeless" class="agent-banner">
+    <!-- === AgentLabeless Section (Teaser Only) === -->
+    <section class="agent-banner">
       <h2>🎯 AgentLabeless <span class="badge-new">NEW</span></h2>
       <p>
         A prompt-powered vision agent that labels like you do —
         with <strong>context</strong>, not <strong>coordinates</strong>.
       </p>
       <div>
-        <a href="https://agentlabeless.coreframeai.com" target="_blank">🚀 Try AgentLabeless</a>
-        <a href="/agentlabeless.html">📓 Read the MVP Story</a>
+        <a href="/agentlabeless.html" target="_blank">📓 Read the MVP Story</a>
       </div>
     </section>
 
-    <!-- Footer Carousel -->
+    <!-- Virtual Card, Carousel, Assist Button -->
     <div class="footer-carousel" id="footer">
       <div class="footer-carousel-track">
         chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents > Prompts > Prototypes > Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks ·
       </div>
     </div>
 
-    <!-- Virtual Business Card Button -->
     <div id="assist-btn" onclick="toggleCard()">🪪</div>
 
-    <!-- Business Card -->
     <div class="card-container" id="card">
       <div class="comet"></div>
       <h3>👤 Chevngko</h3>
-      <p>Founder & Explorer @CoreframeAI</p>
+      <p>Founder & Explorer CoreframeAI</p>
       <p>📬 chevngko@coreframeai.com</p>
       <p><a href="https://linktr.ee/chevngko" target="_blank">🔗 Linktree</a></p>
       <p><a href="https://github.com/paulrydrickpuri" target="_blank">🧠 GitHub</a></p>
       <p><a href="https://x.com/chevngko_DEV" target="_blank">👽 X (Twitter)</a></p>
     </div>
 
-    <!-- Scripts -->
+    <!-- JS -->
     <script>
       const card = document.getElementById("card");
       const footer = document.getElementById("footer");
@@ -61,19 +58,6 @@
         open = !open;
         card.classList.toggle("active", open);
       }
-
-      let startY = null;
-      card.addEventListener("touchstart", (e) => {
-        startY = e.touches[0].clientY;
-      });
-      card.addEventListener("touchmove", (e) => {
-        if (!startY) return;
-        const diff = e.touches[0].clientY - startY;
-        if (diff > 50) {
-          card.classList.remove("active");
-          open = false;
-        }
-      });
 
       document.addEventListener("click", function (event) {
         const isClickInside = card.contains(event.target) || event.target === document.getElementById("assist-btn");
