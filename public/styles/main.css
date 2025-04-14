@@ -314,3 +314,29 @@ a {
   background: #111;
   margin-top: 1.5rem;
 }
+
+.code-caption {
+  margin-top: 1.2rem;
+  margin-bottom: 1.8rem;
+  background: #1f1f1f;
+  padding: 1rem;
+  border-left: 3px solid #00ffee;
+  border-radius: 6px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.caption-text {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 0.4rem;
+}
+
+.caption-code {
+  display: block;
+  font-family: monospace;
+  font-size: 0.95rem;
+  color: #f1f1f1;
+  padding: 0.25rem 0;
+}
