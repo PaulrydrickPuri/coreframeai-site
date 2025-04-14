@@ -285,14 +285,16 @@ a {
 
 code, pre {
   background: #1f1f1f;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin-top: 1rem;
-  display: block;
-  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: #f1f1f1;
+  display: inline-block;
+  font-family: monospace;
   font-size: 0.95rem;
   white-space: pre-wrap;
+  max-width: 90%;
 }
 
 .roadmap {
