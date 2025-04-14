@@ -380,3 +380,42 @@ a {
   position: absolute;
   right: -1ch;
 }
+
+#countdown-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Courier New', monospace;
+  color: #00ffcc;
+  transition: opacity 2s ease;
+  animation: flicker 1.2s infinite alternate;
+  cursor: none;
+}
+
+#timer {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: #00ffcc;
+}
+
+.branding {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #aaaaaa;
+  font-size: 0.9rem;
+}
+
+@keyframes flicker {
+  0%   { opacity: 1; }
+  45%  { opacity: 0.85; }
+  55%  { opacity: 0.95; }
+  70%  { opacity: 0.6; }
+  100% { opacity: 1; }
+}
