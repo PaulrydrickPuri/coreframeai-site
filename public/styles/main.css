@@ -340,3 +340,25 @@ a {
   color: #f1f1f1;
   padding: 0.25rem 0;
 }
+
+.code-log {
+  font-family: monospace;
+  color: #00ffee;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid #00ffee;
+  width: 0;
+  animation: fadeInLog 0.8s ease forwards, typewrite 2.5s steps(40, end) 0.8s forwards;
+}
+
+@keyframes fadeInLog {
+  to { opacity: 1; }
+}
+
+@keyframes typewrite {
+  from { width: 0; }
+  to { width: 100%; }
+}
