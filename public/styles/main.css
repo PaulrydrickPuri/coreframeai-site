@@ -239,3 +239,65 @@ a {
     padding: 0.6rem 1rem;
   }
 }
+
+/* === MVP Founding Story Page === */
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: #f1f1f1;
+  animation: fadeIn 0.6s ease;
+}
+
+.mvp-banner {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.mvp-banner h1 {
+  color: #00ffee;
+  font-size: 2rem;
+}
+
+.tagline {
+  font-style: italic;
+  opacity: 0.85;
+  font-size: 1.05rem;
+}
+
+.mvp-section {
+  margin-top: 2.5rem;
+}
+
+.mvp-section h2 {
+  font-size: 1.3rem;
+  color: #00ffee;
+  margin-bottom: 0.8rem;
+}
+
+.mvp-section p {
+  line-height: 1.6;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+code, pre {
+  background: #1f1f1f;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-top: 1rem;
+  display: block;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+.roadmap {
+  border-left: 4px solid #00ffee;
+  padding-left: 1rem;
+  font-size: 0.95rem;
+  background: #111;
+  margin-top: 1.5rem;
+}

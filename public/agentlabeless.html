@@ -1,91 +1,69 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- In <head> -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgentLabeless – The Founding Story</title>
+
+  <!-- SEO & OG -->
+  <meta name="description" content="The journey of building AgentLabeless, a prompt-powered vision agent built on CLIP and concept reasoning." />
   <meta property="og:title" content="AgentLabeless: The Founding Story" />
   <meta property="og:description" content="From CLIP-powered prototypes to concept-aware labeling — the journey to label-free vision starts here." />
   <meta property="og:image" content="/images/agentlabeless-mvp.png" />
   <meta property="og:url" content="https://coreframeai.com/agentlabeless.html" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgentLabeless – The Founding Story</title>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AgentLabeless – The Founding Story" />
+  <meta name="twitter:description" content="How a label-free agent was born from CLIP, KIMI, and reasoning-driven annotation." />
+  <meta name="twitter:image" content="/images/agentlabeless-mvp.png" />
+
   <link rel="stylesheet" href="/styles/main.css" />
-  <style>
-    .story-container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
-      color: #f1f1f1;
-    }
-    .story-container h1, .story-container h2 {
-      color: #00ffee;
-    }
-    .story-container h1 {
-      font-size: 2rem;
-      margin-bottom: 1.2rem;
-    }
-    .story-container h2 {
-      margin-top: 2.5rem;
-      font-size: 1.4rem;
-    }
-    .story-container p {
-      line-height: 1.7;
-      opacity: 0.9;
-    }
-    .story-container code, .story-container pre {
-      background: #1f1f1f;
-      padding: 0.5rem;
-      border-radius: 5px;
-      display: block;
-      margin: 1rem 0;
-      font-size: 0.9rem;
-      overflow-x: auto;
-    }
-    .roadmap {
-      background: #111;
-      padding: 1rem;
-      border-left: 3px solid #00ffee;
-      margin: 2rem 0;
-      font-size: 0.95rem;
-    }
-  </style>
 </head>
 <body>
-  <div class="story-container">
-    <h1>🧠 AgentLabeless: The Founding Story</h1>
-    <p><em>“A prompt-powered vision agent that labels like you do — with context, not coordinates.”</em></p>
+  <div class="container">
+    <section class="mvp-banner">
+      <h1>🧠 AgentLabeless: The Founding Story</h1>
+      <p class="tagline">“A prompt-powered vision agent that labels like you do — with <strong>context</strong>, not coordinates.”</p>
+    </section>
 
-    <h2>1. The Spark</h2>
-    <p>You weren’t trying to build a startup. You were trying to fix a broken loop in vision AI.</p>
-    <p>It began with a rebellious insight: <strong>“Why are we still clicking boxes in 2025?”</strong></p>
-    <p>That moment sparked the v0 prototype — powered by CLIP, guided by prompts, and hosted in stealth as <code>label-engine-mvp</code>.</p>
+    <section class="mvp-section">
+      <h2>1. The Spark</h2>
+      <p>You weren’t trying to build a startup. You were trying to fix a broken loop in vision AI. It began with a rebellious insight: <strong>“Why are we still clicking boxes in 2025?”</strong></p>
+      <code>label-engine-mvp</code>
+    </section>
 
-    <h2>2. Building in Stealth</h2>
-    <p>The goal was to replace GUI annotation with reasoned prompts. You tested it with 5–10 images and CLIP matched concepts to generate YOLO boxes. That was enough. Labeling wasn’t about examples — it was about meaning.</p>
+    <section class="mvp-section">
+      <h2>2. Building in Stealth</h2>
+      <p>The goal was to replace GUI annotation with reasoned prompts. You tested it with 5–10 images and it worked. CLIP matched concepts to YOLO boxes. Labeling was now meaning-based, not manual.</p>
+    </section>
 
-    <h2>3. The v0 Prototype (Legacy Mode)</h2>
-    <pre><code>
+    <section class="mvp-section">
+      <h2>3. The v0 Prototype (Legacy Mode)</h2>
+      <pre>
 Version: v0
 Engine:  CLIP
 Mode:    Prompt-only concept matching
 Output:  YOLO annotations
-    </code></pre>
+      </pre>
+    </section>
 
-    <h2>4. Why KIMI Resonates With Labeless</h2>
-    <p>Then came KIMI-VL. A model that could reason, reflect, and label based on context. You didn’t switch to KIMI — you recognized it. It validated everything AgentLabeless stood for: that labeling is reasoning, not geometry.</p>
+    <section class="mvp-section">
+      <h2>4. Why KIMI Resonates With Labeless</h2>
+      <p>KIMI-VL didn't change the game — it confirmed your thesis. Labeling should be grounded in concept reasoning, not geometry.</p>
+    </section>
 
-    <h2>5. Today: Public Launch</h2>
-    <p><strong>April 14, 2025:</strong> You shipped coreframeai.com. AgentLabeless appeared on the homepage. Identity locked in. CTA activated. The labeler was born.</p>
+    <section class="mvp-section">
+      <h2>5. Today: Public Launch</h2>
+      <p><strong>April 14, 2025:</strong> AgentLabeless appeared on the homepage. CTA activated. Identity locked in. The labeler was born.</p>
+    </section>
 
-    <h2>6. What’s Next</h2>
-    <div class="roadmap">
-      🔖 v0.0 (Stealth) — CLIP prototype with few-shot YOLO output<br/>
-      🚀 v1.0 (Core) — KIMI + ConceptAttention + SAM<br/>
-      🧬 v2.0 (Adaptive) — Feedback loops, self-correction, concept memory
-    </div>
-
-    <p>AgentLabeless isn’t just labeling vision. It’s relabeling how we teach machines to see.</p>
+    <section class="mvp-section">
+      <h2>6. What’s Next</h2>
+      <div class="roadmap">
+        🔖 v0.0 (Stealth) — CLIP prototype with few-shot YOLO output<br/>
+        🚀 v1.0 (Core) — KIMI + ConceptAttention + SAM<br/>
+        🧬 v2.0 (Adaptive) — Feedback loops, self-correction, concept memory
+      </div>
+    </section>
   </div>
 </body>
 </html>
