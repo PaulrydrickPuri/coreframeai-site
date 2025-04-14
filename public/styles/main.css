@@ -359,7 +359,7 @@ a {
 
 @keyframes typewrite {
   from { width: 0ch; }
-  to { width: 48ch; }
+  to { width: 49ch; }
 }
 
 .code-log::after {
