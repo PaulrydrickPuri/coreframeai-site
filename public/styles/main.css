@@ -1,80 +1,59 @@
-
-/* CoreframeAI base styling */
 body {
-  background-color: #0e0e0e;
+  background: #0e0e0e;
   color: #f1f1f1;
   font-family: system-ui, sans-serif;
-  margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
   text-align: center;
+  margin: 0;
+  overflow-x: hidden;
 }
 
-/* Section Titles */
-h1, h2 {
-  margin: 2rem 0 1rem;
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
 }
 
-/* Agent Card Section */
 .agent-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #141414;
   border-radius: 16px;
   padding: 2rem;
-  margin: 3rem auto;
-  max-width: 720px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.08);
-  transition: transform 0.2s ease;
-  text-align: left;
+  margin-top: 3rem;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  max-width: 600px;
 }
 
-.agent-card:hover {
-  transform: scale(1.02);
+.agent-card h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .agent-card ul {
-  padding-left: 1rem;
-  list-style: none;
-  line-height: 1.6;
+  text-align: left;
+  margin-top: 1rem;
 }
 
 .button-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   margin-top: 1.5rem;
-  justify-content: flex-start;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .button-group a {
-  padding: 0.75rem 1.5rem;
-  background-color: #00ffee;
+  background-color: #00f7ff;
   color: #000;
+  padding: 0.7rem 1.2rem;
   border-radius: 8px;
-  text-decoration: none;
   font-weight: bold;
-  transition: background 0.3s ease;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .button-group a:hover {
-  background-color: #00e6e6;
-}
-
-/* Responsive tweaks */
-@media screen and (max-width: 768px) {
-  .agent-card {
-    padding: 1.5rem;
-    margin: 2rem 1rem;
-    text-align: center;
-  }
-
-  .button-group {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .button-group a {
-    width: 100%;
-    max-width: 320px;
-    text-align: center;
-  }
+  background-color: #0cf;
 }
