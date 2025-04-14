@@ -1,4 +1,41 @@
-/* === AgentLabeless Identity Banner Styling === */
+/* === Base Layout === */
+
+body {
+  background: #0e0e0e;
+  color: #f1f1f1;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  text-align: center;
+  margin: 0;
+  padding: 0 2rem;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+a {
+  color: #00ffcc;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1.5rem;
+  display: inline-block;
+}
+
+/* === AgentLabeless Identity Banner === */
 
 .agent-banner {
   border: 1px solid #222;
@@ -38,6 +75,15 @@
   text-decoration: underline;
 }
 
+/* === Animations === */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Responsive Adjustments === */
+
 @media (max-width: 600px) {
   .agent-banner {
     padding: 1.5rem;
@@ -50,5 +96,9 @@
 
   .agent-banner p {
     font-size: 0.95rem;
+  }
+
+  body {
+    padding: 0 1rem;
   }
 }
