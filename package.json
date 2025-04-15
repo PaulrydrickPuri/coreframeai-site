@@ -4,7 +4,9 @@
   "description": "This is the 🔰 Solo Dev Starter for mentalOS v1 as part of the CoreframeAI v7 architecture.",
   "main": "postcss.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "repository": {
     "type": "git",

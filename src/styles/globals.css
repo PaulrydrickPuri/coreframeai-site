@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: rgb(24 24 27); /* zinc-900 equivalent */
+    color: white;
+    font-family: sans-serif;
+  }
+}
