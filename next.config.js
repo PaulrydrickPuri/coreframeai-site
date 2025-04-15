@@ -2,9 +2,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    swcMinify: true,
+    pageExtensions: ["ts", "tsx", "js", "jsx"],
+  
+    // Tell Next.js that we're using `src/pages`
     experimental: {
-      appDir: false, // if you're not using the App Router yet
+      // No `appDir` anymore in Next 15
+      // You don't need to explicitly set `appDir: false` anymore
     },
   }
   
