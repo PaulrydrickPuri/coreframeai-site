@@ -49,7 +49,7 @@ export default function MentalOSTerminal() {
             >
               <p className="text-sm text-gray-400 mb-2">{`> mentalOS boot ${mode}`}</p>
               <Button className="w-full" onClick={handleConfirm}>
-                > confirm ✅
+                &gt; confirm ✅
               </Button>
             </motion.div>
           ) : (
