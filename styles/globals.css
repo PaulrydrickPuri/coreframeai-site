@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* === Custom Utility Classes === */
+@layer utilities {
+  .text-neon {
+    color: #00ffee;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  }
+
+  .glow-box {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
