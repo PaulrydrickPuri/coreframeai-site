@@ -1,0 +1,35 @@
+{
+  "name": "coreframeai-site",
+  "version": "1.0.0",
+  "description": "This is the 🔰 Solo Dev Starter for mentalOS v1 as part of the CoreframeAI v7 architecture.",
+  "main": "postcss.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PaulrydrickPuri/coreframeai-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PaulrydrickPuri/coreframeai-site/issues"
+  },
+  "homepage": "https://github.com/PaulrydrickPuri/coreframeai-site#readme",
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.488.0",
+    "next": "^15.3.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-variants": "^1.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.4"
+  }
+}
