@@ -1,5 +1,5 @@
 import Hero from '@/os/mentalOS/components/Hero';
-import AgentIntro from '@/components/agent/AgentIntro';
+import AgentIntro from '@/components/agents/AgentIntro';
 
 export default function Home() {
   return (
