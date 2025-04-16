@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
 @layer base {
   body {
@@ -10,21 +11,48 @@
   }
 }
 
-@layer utilities {
-  .animate-marquee {
-    animation: marquee 25s linear infinite;
+@layer components {
+  /* === Infinite Marquee Implementation === */
+  .marquee-wrapper {
+    position: relative;
   }
-
-  .paused {
-    animation-play-state: paused !important;
+  
+  .marquee {
+    display: flex;
+    position: relative;
+    user-select: none;
+    /* Changed from 30s to 120s for a much slower scroll */
+    animation: scroll 120s linear infinite;
   }
-
-  @keyframes marquee {
+  
+  .marquee-group {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 100%;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .marquee {
+      animation-play-state: paused;
+    }
+  }
+  
+  .marquee.pause {
+    animation-play-state: paused;
+  }
+  
+  .hover\:pause:hover {
+    animation-play-state: paused;
+  }
+  
+  @keyframes scroll {
     0% {
-      transform: translateX(0%);
+      transform: translateX(0);
     }
     100% {
-      transform: translateX(-100%);
+      transform: translateX(calc(-100% * 2)); /* Scroll through 2 copies */
     }
   }
 }
@@ -36,4 +64,34 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+@layer utilities {
+  .text-cognitive-blue {
+    color: #00f6ff;
+  }
+
+  .neon-glow {
+    text-shadow:
+      0 0 4px #00f6ff,
+      0 0 8px #00f6ff,
+      0 0 12px #00f6ff,
+      0 0 16px rgba(0, 246, 255, 0.5);
+  }
+
+  .animate-flicker {
+    animation: flicker 3s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      opacity: 1;
+      filter: drop-shadow(0 0 6px #00f6ff);
+    }
+
+    20%, 24%, 55% {
+      opacity: 0.4;
+      filter: drop-shadow(0 0 2px #00f6ff);
+    }
+  }
 }
