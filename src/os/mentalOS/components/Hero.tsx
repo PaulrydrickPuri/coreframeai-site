@@ -53,11 +53,9 @@ const Hero = () => {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+      <section className="snap-start h-screen bg-black text-white flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
         <div className="relative z-10">
-          <h1 className="text-5xl md:text-6xl font-bold font-mono">
-            🧠 CoreframeAI
-          </h1>
+          <h1 className="text-5xl md:text-6xl font-bold font-mono">🧠 CoreframeAI</h1>
           <p className="mt-4 text-lg md:text-xl text-zinc-300">
             A modular system for building task-specific AI agents.
             <br />
@@ -69,15 +67,15 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* 🚀 Footer Carousel */}
+        {/* Footer Carousel */}
         <div
           id="footer"
           className="footer-carousel absolute bottom-0 w-full whitespace-nowrap overflow-hidden text-sm text-gray-400 py-4 border-t border-zinc-800 animate-marquee"
         >
           <div className="inline-block px-4">
-            chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents &gt; Prompts &gt; Prototypes
-            &gt; Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not
-            Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks ·
+            chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents &gt; Prompts &gt;
+            Prototypes &gt; Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop,
+            Not Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks ·
           </div>
         </div>
       </section>

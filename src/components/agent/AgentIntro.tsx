@@ -7,7 +7,7 @@ const AgentIntro = () => {
   return (
     <section
       id="agentlabeless"
-      className="relative z-10 py-24 px-6 text-center bg-gradient-to-b from-black via-zinc-900 to-zinc-950 text-white"
+      className="snap-start h-screen relative z-10 py-24 px-6 text-center bg-gradient-to-b from-black via-zinc-900 to-zinc-950 text-white"
     >
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
@@ -24,9 +24,11 @@ const AgentIntro = () => {
         transition={{ delay: 0.2, duration: 0.7 }}
         className="text-lg md:text-xl text-gray-300 max-w-xl mx-auto mb-8"
       >
-        <span className="font-bold text-white">AgentLabeless</span> is the first task-specific AI agent designed to align with CoreframeAI’s cognition-first architecture.
+        <span className="font-bold text-white">AgentLabeless</span> is the first task-specific AI agent designed to
+        align with CoreframeAI’s cognition-first architecture.
         <br />
-        It labels like you do — with <span className="font-semibold text-white">context</span>, not <span className="italic text-white">coordinates</span>.
+        It labels like you do — with <span className="font-semibold text-white">context</span>, not{' '}
+        <span className="italic text-white">coordinates</span>.
       </motion.p>
 
       <motion.div

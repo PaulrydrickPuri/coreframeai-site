@@ -1,14 +1,11 @@
 import Hero from '@/os/mentalOS/components/Hero';
 import AgentIntro from '@/components/agent/AgentIntro';
+
 export default function Home() {
   return (
-    <main className="bg-black text-white">
+    <main className="h-screen snap-y snap-mandatory overflow-y-scroll scroll-smooth bg-black text-white">
       <Hero />
-
-      {/* Add more sections here like: */}
-      {<Hero />}
-      {<AgentIntro />}
-      {/* <Footer /> */}
+      <AgentIntro />
     </main>
   );
 }
