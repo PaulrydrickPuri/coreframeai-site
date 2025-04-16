@@ -1,60 +1,88 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
+import Head from 'next/head';
+import { useEffect } from 'react';
 
-export default function Hero() {
+const Hero = () => {
+  useEffect(() => {
+    const footer = document.getElementById('footer');
+    if (!footer) return;
+
+    const togglePause = () => footer.classList.toggle('paused');
+
+    footer.addEventListener('mouseenter', () => footer.classList.add('paused'));
+    footer.addEventListener('mouseleave', () => footer.classList.remove('paused'));
+    footer.addEventListener('touchstart', togglePause);
+
+    return () => {
+      footer.removeEventListener('mouseenter', () => footer.classList.add('paused'));
+      footer.removeEventListener('mouseleave', () => footer.classList.remove('paused'));
+      footer.removeEventListener('touchstart', togglePause);
+    };
+  }, []);
+
   return (
-    <section className="relative z-10 text-center py-24 px-6 bg-black text-white overflow-hidden">
-      {/* 🌌 Subtle cosmic glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="animate-pulse opacity-10 bg-gradient-to-br from-blue-600/30 via-purple-600/20 to-transparent h-full w-full blur-3xl" />
-      </div>
+    <>
+      <Head>
+        <title>CoreframeAI – Prompt-Powered Agents for the Cognitive Era</title>
+        <meta
+          name="description"
+          content="CoreframeAI is a platform for building cognition-first AI agents like AgentLabeless. From research to deployment – faster than ever."
+        />
+        <meta
+          name="keywords"
+          content="CoreframeAI, AgentLabeless, prompt-based labeling, AI agents, labeling tools, computer vision AI, human-in-the-loop, context-aware AI"
+        />
+        <meta name="author" content="Chevngko - CoreframeAI" />
+        <meta property="og:title" content="CoreframeAI – Agents with Context, Not Coordinates" />
+        <meta
+          property="og:description"
+          content="Meet AgentLabeless – a vision agent that labels like you do. CoreframeAI is bringing a new era of prompt-powered cognition-first tools."
+        />
+        <meta property="og:image" content="https://coreframeai.com/images/agentlabeless-mvp.png" />
+        <meta property="og:url" content="https://coreframeai.com" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="CoreframeAI is Live – Prompt-Powered AI Agents Are Here" />
+        <meta
+          name="twitter:description"
+          content="From CLIP-powered vision to concept-based labeling – CoreframeAI is launching a new kind of agent."
+        />
+        <meta name="twitter:image" content="https://coreframeai.com/images/agentlabeless-mvp.png" />
+        <link rel="canonical" href="https://coreframeai.com/" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
 
-      {/* 🧠 MentalOS Title */}
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        className="text-4xl md:text-6xl font-bold relative z-20 font-mono"
-      >
-        🧠 MentalOS
-      </motion.h1>
+      <section className="bg-black text-white min-h-screen flex flex-col items-center justify-center px-6 text-center relative overflow-hidden">
+        <div className="relative z-10">
+          <h1 className="text-5xl md:text-6xl font-bold font-mono">
+            🧠 CoreframeAI
+          </h1>
+          <p className="mt-4 text-lg md:text-xl text-zinc-300">
+            A modular system for building task-specific AI agents.
+            <br />
+            From research → to prototype → to deployment — all under one cognitive stack.
+          </p>
+          <p className="mt-6 text-sm text-zinc-500">
+            🚀 Phase 1 Launch: Q2 2025 <br />
+            🧠 CoreframeAI is rolling out cognition-first agents, one prototype at a time.
+          </p>
+        </div>
 
-      {/* 💡 Description */}
-      <motion.p
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="mt-4 text-lg md:text-xl text-zinc-400 max-w-xl mx-auto relative z-20"
-      >
-        Your cognitive operating system for building, debugging, and deploying AI agents.
-      </motion.p>
-
-      {/* 🛰️ Context Phrase */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6, duration: 0.6 }}
-        className="mt-6 text-sm text-zinc-500 relative z-20"
-      >
-        From research to reasoning — inside one cognitive stack.
-      </motion.p>
-
-      {/* ↓ Meet the Agents */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.6 }}
-        className="mt-12"
-      >
-        <Link
-          href="#agent-intro"
-          className="inline-block text-sm text-blue-300 hover:text-blue-500 transition duration-300 ease-in-out"
+        {/* 🚀 Footer Carousel */}
+        <div
+          id="footer"
+          className="footer-carousel absolute bottom-0 w-full whitespace-nowrap overflow-hidden text-sm text-gray-400 py-4 border-t border-zinc-800 animate-marquee"
         >
-          ↓ Meet the Agents
-        </Link>
-      </motion.div>
-    </section>
+          <div className="inline-block px-4">
+            chevngko@coreframeai.com · MentalOS-driven · Architecting the future · Agents &gt; Prompts &gt; Prototypes
+            &gt; Products · Less Labeling, More Learning · Compose Cognitive Pipelines · Human-in-the-Loop, Not
+            Human-in-the-Way · AgentLabeless: Label with Prompts, Not Clicks ·
+          </div>
+        </div>
+      </section>
+    </>
   );
-}
+};
+
+export default Hero;
