@@ -94,4 +94,12 @@ body {
       filter: drop-shadow(0 0 2px #00f6ff);
     }
   }
+
+  .mask-fade {
+    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent 70%);
+    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent 70%);
+    mask-composite: exclude;
+  }
+
+
 }
