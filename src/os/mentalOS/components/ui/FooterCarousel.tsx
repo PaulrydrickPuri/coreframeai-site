@@ -3,14 +3,15 @@ import React from 'react';
 
 const phrases = [
   { text: 'chevngko@coreframeai.com', hint: 'Email' },
-  { text: 'MentalOS-driven', hint: 'Cognitive-first OS' },
-  { text: 'Architecting the future', hint: 'Vision' },
-  { text: 'Agents > Prompts > Prototypes > Products', hint: 'CoreframeAI Flow' },
-  { text: 'Less Labeling, More Learning', hint: 'Efficiency' },
-  { text: 'Compose Cognitive Pipelines', hint: 'Workflow Power' },
-  { text: 'Human-in-the-Loop, Not Human-in-the-Way', hint: 'Assistive Design' },
-  { text: 'AgentLabeless: Label with Prompts, Not Clicks', hint: 'Our first agent' },
+  { text: 'CoreframeAI™', hint: 'Trademark in progress · Class 42' },
+  { text: 'Build Agents That Think in Loops', hint: 'CoreframeAI Vision' },
+  { text: 'Agents > Prompts > Prototypes > Products', hint: 'System Flow' },
+  { text: 'Less Labeling, More Learning', hint: 'Efficiency by Design' },
+  { text: 'Human-in-the-Loop, Not Human-in-the-Way', hint: 'Assistive AI Philosophy' },
+  { text: 'MENTAL Loop: Map → Encode → Navigate → Test → Amplify → Learn', hint: 'Cognitive Reasoning Framework' },
+  { text: 'AgentLabeless: Label with Prompts, Not Clicks', hint: 'Vision Agent · v0 Live' },
 ];
+
 
 const FooterCarousel = () => {
   return (

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Link from 'next/link';
+
 import EnhancedOrbitalCarousel from '@/components/agents/EnhancedOrbitalCarousel';
 
 const AgentIntro = () => {
@@ -33,7 +33,7 @@ const AgentIntro = () => {
       >
         <p className="text-lg md:text-xl text-gray-300">
           <span className="font-bold text-white">Agents</span> are task-specific AI agent designed to align with 
-          <span className="font-bold text-white"> CoreframeAI's cognition-first architecture</span>.
+          <span className="font-bold text-white"> CoreframeAI&apos;s cognition-first architecture</span>.
         </p>
       </motion.div>
 
@@ -49,7 +49,7 @@ const AgentIntro = () => {
           {/* Carousel container */}
           <div className="absolute inset-0 flex items-center justify-center">
             <EnhancedOrbitalCarousel
-              containerClassName="h-full"
+              
               agents={[
                 {
                   id: 'agent1',
