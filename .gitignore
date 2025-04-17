@@ -1,1 +1,52 @@
-node_modules
+# Node dependencies
+node_modules/
+
+# Builds & Next.js cache
+.next/
+out/
+dist/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+*.log.*
+
+# Environment secrets
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Supabase (CLI cache, studio state)
+.supabase/
+*.supabase/
+
+# IDEs and Editor Configs
+.vscode/
+.idea/
+*.swp
+*.sublime-project
+*.sublime-workspace
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Tailwind output (if JIT cache added)
+tailwind.config.js
+postcss.config.js
+
+# Personal configs
+*.mentalrc.json
+*.mentalconfig.json
+
+# Git artifacts
+*.orig
+*.rej
+*.merge
+*.tsbuildinfo
