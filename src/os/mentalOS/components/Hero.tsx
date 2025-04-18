@@ -46,7 +46,7 @@ const Hero = () => {
           className="w-full flex justify-center text-xs md:text-sm font-mono mb-2 z-20"
         >
           <span className="text-cyan-400 bg-black/40 rounded-full px-4 py-1 backdrop-blur-sm animate-pulse">
-          ↓ scroll to meet the agent -- <span className="italic">coming soon</span> 👀 ↓
+          ↓ <span className="italic">coming soon</span> 👀 ↓
           </span>
         </motion.div>
 
