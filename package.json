@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/PaulrydrickPuri/coreframeai-site#readme",
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.0",
     "@supabase/supabase-js": "^2.49.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -29,10 +30,13 @@
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwind-variants": "^1.0.0"
+    "sonner": "^2.0.3",
+    "tailwind-merge": "^3.2.0",
+    "tailwind-variants": "^1.0.0",
+    "tw-animate-css": "^1.2.5"
   },
   "devDependencies": {
-    "@types/node": "^22.14.1",
+    "@types/node": "20.8.10",
     "@types/react": "^19.1.2",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.24.0",
