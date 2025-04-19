@@ -1,6 +1,6 @@
 export async function fetchPostSuggestions(notes: string, mode: string) {
     try {
-      const response = await fetch("/api/postpulse", {
+      const response = await fetch("/api/postpulse/suggest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ notes, mode }),
