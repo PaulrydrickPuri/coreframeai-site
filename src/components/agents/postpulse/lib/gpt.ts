@@ -1,12 +1,26 @@
-// src/components/agents/postpulse/lib/gpt.ts
 export async function fetchPostSuggestions(notes: string, mode: string) {
-    const response = await fetch("/api/postpulse", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ notes, mode }),
-    });
+    try {
+      const response = await fetch("/api/postpulse", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notes, mode }),
+      });
   
-    const data = await response.json();
-    return Array.isArray(data.suggestions) ? data.suggestions : [data.suggestions];
+      const data = await response.json();
+  
+      if (!data || !data.suggestions) {
+        throw new Error("No suggestions returned from API");
+      }
+  
+      const raw = data.suggestions;
+      const suggestions = Array.isArray(raw)
+        ? raw
+        : raw.split("\n").filter((line: string) => line.trim().length > 0);
+  
+      return suggestions;
+    } catch (err) {
+      console.error("❌ GPT fetch error:", err);
+      return ["⚠️ GPT failed to return suggestions."];
+    }
   }
   
