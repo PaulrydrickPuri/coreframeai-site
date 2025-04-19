@@ -1,11 +1,13 @@
-'use client';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
-import FooterCarousel from '@/components/ui/FooterCarousel';
-import { Italic } from 'lucide-react';
+"use client";
+
+import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import FooterCarousel from "@/components/ui/FooterCarousel";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
-  const [hovered, setHovered] = useState(false); // <- this line is crucial!
+  const router = useRouter();
+
   return (
     <section
       id="hero"
@@ -19,9 +21,7 @@ const Hero = () => {
           <p className="mt-4 text-lg text-zinc-300">
             From research → prototype → deployment — all under one cognitive stack.
           </p>
-          <p className="mt-4 text-sm text-zinc-500">
-            🚀 Phase 1 Launch: Q2 2025
-          </p>
+          <p className="mt-4 text-sm text-zinc-500">🚀 Phase 1 Launch: Q2 2025</p>
         </div>
 
         {/* Reflection */}
@@ -30,10 +30,17 @@ const Hero = () => {
           <p className="mt-4 text-lg text-zinc-300">
             From research → prototype → deployment — all under one cognitive stack.
           </p>
-          <p className="mt-4 text-sm text-zinc-500">
-            🚀 Phase 1 Launch: Q2 2025
-          </p>
+          <p className="mt-4 text-sm text-zinc-500">🚀 Phase 1 Launch: Q2 2025</p>
         </div>
+
+        {/* Launch Button */}
+        <Button
+          size="lg"
+          className="mt-8 text-base font-medium px-6 py-3 transition-transform hover:scale-105"
+          onClick={() => router.push("/PostPulsePage")}
+        >
+          🚀 Launch PostPulse
+        </Button>
       </div>
 
       {/* Bottom Fixed Section */}
@@ -46,11 +53,11 @@ const Hero = () => {
           className="w-full flex justify-center text-xs md:text-sm font-mono mb-2 z-20"
         >
           <span className="text-cyan-400 bg-black/40 rounded-full px-4 py-1 backdrop-blur-sm animate-pulse">
-          ↓ <span className="italic">coming soon</span> 👀 ↓
+            ↓ <span className="italic">coming soon</span> 👀 ↓
           </span>
         </motion.div>
 
-        {/* Gradient fade-out to blend to black */}
+        {/* Gradient fade-out */}
         <div className="absolute bottom-[42px] left-0 w-full h-16 bg-gradient-to-t from-black via-zinc-900/80 to-transparent pointer-events-none z-10" />
 
         {/* Footer Carousel */}
