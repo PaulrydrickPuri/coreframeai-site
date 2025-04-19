@@ -24,14 +24,11 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
 
     try {
       const ideas = await fetchPostSuggestions(notes, mode);
-      console.log("📥 GPT Response:", ideas);
+      const processed = Array.isArray(ideas)
+        ? ideas
+        : ideas.split("\n").filter((line: string) => line.trim().length > 0);
 
-      // Ensure consistent array structure
-      if (Array.isArray(ideas)) {
-        setSuggestions(ideas);
-      } else {
-        setSuggestions([ideas]);
-      }
+      setSuggestions(processed);
     } catch (err) {
       console.error("⚠️ GPT Error:", err);
       setError("Failed to fetch suggestions. Try again later.");
@@ -54,10 +51,10 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
     });
   };
 
-  const handleSave = async (idea: string) => {
+  const handleSave = async (text: string) => {
     const { error } = await supabase
       .from("suggestions")
-      .insert([{ content: idea, mode, label: getDateLabel() }]);
+      .insert([{ content: text, mode, label: getDateLabel() }]);
 
     if (error) {
       console.error("Supabase insert error:", error);
@@ -67,7 +64,7 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
     }
   };
 
-  const handleUse = (idea: string) => {
+  const handleUse = (text: string) => {
     toast("🗓️ Added to schedule", {
       description: "This idea is ready to plan in your calendar.",
     });
@@ -91,22 +88,22 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
       <ul className="space-y-3">
         {suggestions.length === 0 && !loading && (
           <li className="text-sm italic text-muted-foreground">
-            Nothing yet. Hit <b>"Generate"</b> to get started!
+            Nothing yet. Hit <strong>Generate</strong> to get started!
           </li>
         )}
 
-        {suggestions.map((idea, idx) => (
+        {suggestions.map((text, idx) => (
           <li
             key={idx}
             className="p-3 rounded-md border bg-background text-foreground shadow-sm space-y-2"
           >
-            <p className="whitespace-pre-line text-sm">{idea}</p>
+            <p className="whitespace-pre-line text-sm">{text}</p>
             <div className="flex gap-2">
               <Button
                 size="sm"
                 variant="outline"
                 className="text-xs"
-                onClick={() => copyToClipboard(idea)}
+                onClick={() => copyToClipboard(text)}
               >
                 <ClipboardCopyIcon className="w-3 h-3 mr-1" /> Copy
               </Button>
@@ -114,7 +111,7 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
                 size="sm"
                 variant="outline"
                 className="text-xs"
-                onClick={() => handleUse(idea)}
+                onClick={() => handleUse(text)}
               >
                 <CalendarIcon className="w-3 h-3 mr-1" /> Use this
               </Button>
@@ -122,7 +119,7 @@ export default function SuggestionsPanel({ notes, mode }: Props) {
                 size="sm"
                 variant="outline"
                 className="text-xs"
-                onClick={() => handleSave(idea)}
+                onClick={() => handleSave(text)}
               >
                 <SaveIcon className="w-3 h-3 mr-1" /> Save
               </Button>
