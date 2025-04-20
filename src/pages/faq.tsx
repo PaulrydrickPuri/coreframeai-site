@@ -100,7 +100,7 @@ const FAQ = () => {
             <div>
               <h2 className="text-xl font-semibold text-cyan-300">What is FocusTuner?</h2>
               <p className="mt-2">
-                FocusTuner is a cognitive compass — an agent designed to motivate when you're burned out, and regulate when you're pushing too hard. It balances energy with intention.
+                FocusTuner is a cognitive compass — an agent designed to motivate when you&apos;re burned out, and regulate when you&apos;re pushing too hard. It balances energy with intention.
               </p>
             </div>
 
@@ -118,7 +118,7 @@ const FAQ = () => {
             <div>
               <h2 className="text-xl font-semibold text-cyan-300">How can I try it?</h2>
               <p className="mt-2">
-                We’re onboarding early collaborators. Email us at <a href="mailto:chevngko@coreframeai.com" className="text-cyan-400 underline">chevngko@coreframeai.com</a> or visit <Link href="/">coreframeai.com</Link> to learn more.
+                We&apos;re onboarding early collaborators. Email us at <a href="mailto:chevngko@coreframeai.com" className="text-cyan-400 underline">chevngko@coreframeai.com</a> or visit <Link href="/">coreframeai.com</Link> to learn more.
               </p>
             </div>
           </div>
