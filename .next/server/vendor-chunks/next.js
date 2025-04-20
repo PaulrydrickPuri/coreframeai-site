@@ -702,6 +702,16 @@ eval("\nObject.defineProperty(exports, \"__esModule\", ({\n    value: true\n}));
 
 /***/ }),
 
+/***/ "(pages-dir-node)/./node_modules/next/head.js":
+/*!***********************************!*\
+  !*** ./node_modules/next/head.js ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__(/*! ./dist/shared/lib/head */ \"(pages-dir-node)/./node_modules/next/dist/shared/lib/head.js\")\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHBhZ2VzLWRpci1ub2RlKS8uL25vZGVfbW9kdWxlcy9uZXh0L2hlYWQuanMiLCJtYXBwaW5ncyI6IkFBQUEsa0lBQWtEIiwic291cmNlcyI6WyIvVXNlcnMvcGF1bHJ5ZHJpY2twdXJpL0RvY3VtZW50cy9jb3JlZnJhbWVhaS1zaXRlL25vZGVfbW9kdWxlcy9uZXh0L2hlYWQuanMiXSwic291cmNlc0NvbnRlbnQiOlsibW9kdWxlLmV4cG9ydHMgPSByZXF1aXJlKCcuL2Rpc3Qvc2hhcmVkL2xpYi9oZWFkJylcbiJdLCJuYW1lcyI6W10sImlnbm9yZUxpc3QiOlswXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///(pages-dir-node)/./node_modules/next/head.js\n");
+
+/***/ }),
+
 /***/ "(pages-dir-node)/./node_modules/next/link.js":
 /*!***********************************!*\
   !*** ./node_modules/next/link.js ***!
