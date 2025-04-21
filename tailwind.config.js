@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -7,6 +8,19 @@ module.exports = {
     extend: {
       fontFamily: {
         mono: ['JetBrains Mono', 'monospace'],
+      },
+      colors: {
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        border: 'hsl(var(--border))',
+        ring: 'hsl(var(--ring))',
+        input: 'hsl(var(--input))',
+        muted: 'hsl(var(--muted))',
+        'muted-foreground': 'hsl(var(--muted-foreground))',
+        primary: 'hsl(var(--primary))',
+        'primary-foreground': 'hsl(var(--primary-foreground))',
+        card: 'hsl(var(--card))',
+        'card-foreground': 'hsl(var(--card-foreground))',
       },
       animation: {
         marquee: 'marquee 40s linear infinite',
@@ -18,5 +32,5 @@ module.exports = {
         },
       },
     },
-  },  
-}  
+  },
+}

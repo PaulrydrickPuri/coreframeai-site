@@ -34,12 +34,8 @@ logs/
 *.sublime-workspace
 
 # System files
-.DS_Store
+**/.DS_Store
 Thumbs.db
-
-# Tailwind output (if JIT cache added)
-tailwind.config.js
-postcss.config.js
 
 # Personal configs
 *.mentalrc.json
