@@ -5,8 +5,8 @@
 
 @layer base {
   body {
-    background-color: rgb(24 24 27); /* zinc-900 equivalent */
-    color: white;
+    background-color: #121726; /* Dark navy instead of black */
+    color: #e2e8f0; /* Light gray instead of pure white */
     font-family: sans-serif;
   }
 }
@@ -68,15 +68,15 @@ body {
 
 @layer utilities {
   .text-cognitive-blue {
-    color: #00f6ff;
+    color: #00e1ff; /* Slightly softened from #00f6ff */
   }
 
   .neon-glow {
     text-shadow:
-      0 0 4px #00f6ff,
-      0 0 8px #00f6ff,
-      0 0 12px #00f6ff,
-      0 0 16px rgba(0, 246, 255, 0.5);
+      0 0 4px #00e1ff,
+      0 0 8px #00e1ff,
+      0 0 12px #00e1ff,
+      0 0 16px rgba(0, 225, 255, 0.4); /* Reduced intensity */
   }
 
   .animate-flicker {
@@ -85,21 +85,25 @@ body {
 
   @keyframes flicker {
     0%, 18%, 22%, 25%, 53%, 57%, 100% {
-      opacity: 1;
-      filter: drop-shadow(0 0 6px #00f6ff);
+      opacity: 0.9; /* Reduced from 1.0 */
+      filter: drop-shadow(0 0 6px #00e1ff);
     }
 
     20%, 24%, 55% {
       opacity: 0.4;
-      filter: drop-shadow(0 0 2px #00f6ff);
+      filter: drop-shadow(0 0 2px #00e1ff);
     }
   }
 
   .mask-fade {
-    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent 70%);
-    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), transparent 70%);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent 70%); /* Reduced opacity */
+    mask-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), transparent 70%);
     mask-composite: exclude;
   }
 
-
+  /* Adding subtle texture background */
+  .bg-texture {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239C92AC' fill-opacity='0.03' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+    background-color: #121726;
+  }
 }

@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "lib": [
-      "dom",
-      "esnext"
-    ],
+    "lib": ["dom", "esnext"],
     "module": "esnext",
     "moduleResolution": "node",
     "jsx": "preserve",
@@ -13,25 +10,24 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "baseUrl": "src",
+    "baseUrl": ".",                            // ✅ Root of the project
     "paths": {
-      "@/*": [
-        "*"
-      ],
-      "@/components/*": ["components/*"]
+      "@/*": ["src/*"],                        // Root alias
+      "@components/*": ["src/components/*"],   // Component alias
+      "@lib/*": ["src/lib/*"],                 // Utility & client code
+      "@styles/*": ["src/styles/*"]            // CSS or Tailwind configs
     },
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [{ "name": "next" }]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
-
