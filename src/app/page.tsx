@@ -1,13 +1,12 @@
 // src/app/page.tsx
-
-import Hero from "@/components/organisms/Hero";
+import Hero from "@components/organisms/Hero";
+import FeatureColumns from "@components/sections/FeatureColumns";
 
 export default function HomePage() {
   return (
-    <main>
+    <>
       <Hero />
-    {/* …other sections like FeatureColumns, Testimonials */}
-      {/* …other sections */}
-    </main>
+      <FeatureColumns />
+    </>
   );
 }

@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import FooterCarousel from 'components/molecules/FooterCarousel';
+import FooterCarousel from '@/components/molecules/FooterCarousel';
 
 export default function Hero() {
   return (
@@ -9,8 +9,8 @@ export default function Hero() {
       id="hero"
       className="snap-start flex h-screen flex-col items-center bg-texture bg-[#121726] text-[#e2e8f0] px-6 relative"
     >
-      {/* Main content - using padding-top to push it above center */}
-      <div className="flex flex-1 flex-col items-center justify-center pt-12">
+      {/* Centered Main Content */}
+      <div className="flex-1 flex flex-col items-center justify-center">
         <div className="flex flex-col items-center text-center space-y-4 z-20">
           <h1 className="text-5xl md:text-6xl font-bold font-mono">🧠 CoreframeAI™</h1>
           <p className="text-lg text-[#a0aec0]">
@@ -38,7 +38,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Mirrored Reflection - softer */}
+        {/* Reflection */}
         <div className="absolute inset-x-0 bottom-48 flex flex-col items-center space-y-4 transform scale-y-[-1] opacity-10 mask-fade pointer-events-none z-10">
           <h1 className="text-5xl md:text-6xl font-bold font-mono">🧠 CoreframeAI™</h1>
           <p className="text-lg text-[#a0aec0]">
@@ -48,7 +48,9 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Carousel - reserved space at bottom */}
+      
+
+      {/* Carousel */}
       <div className="w-full pb-8 z-20">
         <FooterCarousel />
       </div>
