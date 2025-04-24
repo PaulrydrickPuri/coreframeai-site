@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/PaulrydrickPuri/coreframeai-site#readme",
   "dependencies": {
+    "@headlessui/react": "^2.2.2",
     "@supabase/supabase-js": "^2.49.4",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.24.0",
     "eslint-config-next": "^15.3.0",

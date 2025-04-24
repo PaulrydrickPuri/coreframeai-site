@@ -13,8 +13,14 @@
     "baseUrl": ".",                            // ✅ Root of the project
     "paths": {
       "@/*": ["src/*"],                        // Root alias
-      "@components/*": ["src/components/*"],   // Component alias
-      "@lib/*": ["src/lib/*"],                 // Utility & client code
+      "@shared/*": ["src/shared/*"],           // Shared components and utilities
+      "@features/*": ["src/features/*"],       // Feature components
+      "@utils/*": ["src/utils/*"],             // Utility functions
+      "@hooks/*": ["src/hooks/*"],             // Custom React hooks
+      "@types/*": ["src/types/*"],             // TypeScript types
+      "@config/*": ["src/config/*"],           // Configuration
+      "@services/*": ["src/services/*"],       // API services
+      "@constants/*": ["src/constants/*"],     // Constants
       "@styles/*": ["src/styles/*"]            // CSS or Tailwind configs
     },
     "resolveJsonModule": true,

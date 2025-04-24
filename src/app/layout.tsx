@@ -1,17 +1,22 @@
-// src/app/layout.tsx
-import "@/styles/globals.css";
-import Navbar from "@components/molecules/Navbar";
-import { ReactNode } from "react";
+import '../styles/globals.css';
+import { Inter } from 'next/font/google';
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+const inter = Inter({ subsets: ['latin'] });
+
+export const metadata = {
+  title: 'CoreframeAI',
+  description: 'Your AI Development Partner',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen bg-black text-white">
-        <Navbar /> {/* ✅ Renders properly at top, handles its own layout */}
-
-        <main className="flex-1 min-h-0 overflow-auto bg-black">
-          {children}
-        </main>
+      <body className={inter.className}>
+        <main className="min-h-screen">{children}</main>
       </body>
     </html>
   );
