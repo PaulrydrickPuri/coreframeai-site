@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from 'react';
-import MCPResultCard from '@features/prototype/components/MCPResultCard';
-import PostRunActions from '@features/prototype/components/PostRunActions';
+import MCPResultCard from './MCPResultCard';
+import PostRunActions from './PostRunActions';
 
 interface TimeValueResult {
   hourlyRate: number;

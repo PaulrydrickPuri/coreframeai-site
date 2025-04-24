@@ -20,7 +20,7 @@ export default function PostRunActions({ result }: PostRunActionsProps) {
   const [reminderSubmitted, setReminderSubmitted] = useState<boolean>(false);
 
   const handleCopyLink = () => {
-    const shareableLink = `https://coreframe.ai/mcp/run?tool=calculate_time_value&monthly_income=${encodeURIComponent(result.hourlyRate * 40 * 4)}&working_hours=${encodeURIComponent(40)}`;
+    const shareableLink = `https://coreframeai.com/mcp/run?tool=calculate_time_value&monthly_income=${encodeURIComponent(result.hourlyRate * 40 * 4)}&working_hours=${encodeURIComponent(40)}`;
     navigator.clipboard.writeText(shareableLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);

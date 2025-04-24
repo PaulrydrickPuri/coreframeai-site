@@ -18,7 +18,7 @@ const workflowSteps = [
     description: 'Build and iterate on your AI solutions',
     icon: '⚙️',
     color: 'from-purple-500 to-pink-400',
-    href: '/prototype'
+    href: '/prototype/mcp-playground'
   },
   {
     id: 'deploy',
