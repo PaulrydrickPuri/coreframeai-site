@@ -139,7 +139,7 @@ export default function SearchBar() {
                   </div>
                 ) : searchQuery.length > 1 ? (
                   <div className="p-8 text-center text-gray-400">
-                    No results found for "{searchQuery}"
+                    No results found for &quot;{searchQuery}&quot;
                   </div>
                 ) : (
                   <div className="p-8 text-center text-gray-400">

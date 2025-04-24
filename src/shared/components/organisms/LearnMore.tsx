@@ -57,12 +57,12 @@ export default function LearnMore() {
           >
             <h2 className="text-2xl font-semibold text-[#00e1ff] font-mono">Our Mindset</h2>
             <p className="mt-4">
-              CoreframeAI isn't just a tech stack. It's a cognitive architecture. Instead of building AI as linear tools, we scaffold loops — systems that reflect how we learn, reason, and evolve.
+              CoreframeAI isn&apos;t just a tech stack. It&apos;s a cognitive architecture. Instead of building AI as linear tools, we scaffold loops — systems that reflect how we learn, reason, and evolve.
             </p>
             <div className="mt-6 p-4 bg-[#121726]/50 rounded-lg border border-[#00e1ff]/5">
               <p className="text-[#e2e8f0]">
                 ✦ Agents reason using the <strong className="text-white">MENTAL Loop</strong>: Map → Encode → Navigate → Test → Amplify → Learn<br />
-                ✦ Our north star isn't just low loss — it's <strong className="text-white">reasoning clarity</strong> and <strong className="text-white">cognition delta</strong><br />
+                ✦ Our north star isn&apos;t just low loss — it&apos;s <strong className="text-white">reasoning clarity</strong> and <strong className="text-white">cognition delta</strong><br />
                 ✦ We build systems that grow in understanding over time — not just accuracy
               </p>
             </div>
@@ -151,8 +151,8 @@ Step 73 → TraceCFAI signal: plateau nearing (∆ < 0.02)`}
                 <h3 className="text-lg font-semibold text-white">🧬 CoT Comparison</h3>
                 <p className="mt-2 text-[#a0aec0] text-sm">
                   <strong>Task:</strong> A buys 12 apples at RM3 each. How much?<br />
-                  M₄: "12 × 3 = 36" → RM36<br />
-                  M₅: "A buys 12 apples, each costs RM3. 12×3 = 36" → RM36<br />
+                  M₄: &quot;12 × 3 = 36&quot; → RM36<br />
+                  M₅: &quot;A buys 12 apples, each costs RM3. 12×3 = 36&quot; → RM36<br />
                   <em className="text-[#00e1ff]">🧠 Reasoning Depth: +21%</em>
                 </p>
               </div>
@@ -184,7 +184,7 @@ Step 73 → TraceCFAI signal: plateau nearing (∆ < 0.02)`}
             transition={{ delay: 1.1, duration: 0.5 }}
           >
             <blockquote className="text-xl italic text-[#a0aec0] text-center py-4">
-              "Loss is not cognition. We don't just minimize — we mutate meaning."<br />
+              &quot;Loss is not cognition. We don&apos;t just minimize — we mutate meaning.&quot;<br />
               <span className="text-sm block mt-2">— Chevngko, Architect of CoreframeAI</span>
             </blockquote>
           </motion.div>

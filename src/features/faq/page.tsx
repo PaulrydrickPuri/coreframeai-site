@@ -84,7 +84,7 @@ const FAQ = () => {
           >
             <h2 className="text-2xl font-semibold text-[#00e1ff] font-mono">What is the MENTAL Loop?</h2>
             <p className="mt-4">
-              The <strong className="text-white">MENTAL Loop</strong> is CoreframeAI's cognitive framework for building agents that think iteratively. It stands for:
+              The <strong className="text-white">MENTAL Loop</strong> is CoreframeAI&apos;s cognitive framework for building agents that think iteratively. It stands for:
             </p>
             <ul className="mt-4 space-y-2 list-disc list-inside">
               <li><strong className="text-white">M</strong>ap — Create a mental model of the problem space</li>
@@ -129,7 +129,7 @@ const FAQ = () => {
           >
             <h2 className="text-2xl font-semibold text-[#00e1ff] font-mono">How is CoreframeAI different?</h2>
             <p className="mt-4">
-              Unlike traditional AI platforms that focus on single-pass inference, CoreframeAI is built around iterative cognition. Our agents don't just predict — they reason, reflect, and refine their understanding through multiple cognitive loops. This enables more robust problem-solving and genuine reasoning capabilities.
+              Unlike traditional AI platforms that focus on single-pass inference, CoreframeAI is built around iterative cognition. Our agents don&apos;t just predict — they reason, reflect, and refine their understanding through multiple cognitive loops. This enables more robust problem-solving and genuine reasoning capabilities.
             </p>
           </motion.div>
         </motion.div>
