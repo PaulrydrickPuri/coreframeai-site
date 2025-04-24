@@ -240,7 +240,7 @@ console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
                 </svg>
                 <h4 className="text-lg font-medium text-white mb-1">Reminder Set!</h4>
                 <p className="text-green-300">
-                  You'll receive a daily reminder at {reminderTime} about your time value.
+                  You&apos;ll receive a daily reminder at {reminderTime} about your time value.
                 </p>
               </div>
             )}
