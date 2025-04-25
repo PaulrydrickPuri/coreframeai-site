@@ -79,57 +79,93 @@ export function useUserMemory() {
       try {
         setIsLoading(true);
         
-        // Try to fetch existing user memory
-        const { data, error } = await supabase
-          .from('user_memory')
-          .select('*')
-          .eq('user_id', userId)
-          .single();
+        // Create default memory object for all users
+        const newMemory: UserMemory = {
+          user_id: userId,
+          preferences: {}
+        };
         
-        if (error && error.code !== 'PGRST116') { // PGRST116 is "no rows returned"
-          throw error;
+        // Try to load from localStorage for anonymous users
+        if (userId.startsWith('anon_')) {
+          const savedPrefs = localStorage.getItem('user_preferences');
+          if (savedPrefs) {
+            newMemory.preferences = JSON.parse(savedPrefs);
+          }
+          setUserMemory(newMemory);
+          
+          // Load tool history from localStorage
+          const localHistory = JSON.parse(localStorage.getItem('tool_usage_history') || '[]');
+          setToolHistory(localHistory);
+          setIsLoading(false);
+          return;
         }
         
-        if (data) {
-          setUserMemory(data);
-        } else {
-          // Create new user memory if none exists
-          const newMemory: UserMemory = {
-            user_id: userId,
-            preferences: {}
-          };
+        // For authenticated users, try to use Supabase if available
+        try {
+          // Check if the table exists by making a small query
+          const { data, error } = await supabase
+            .from('user_memory')
+            .select('*')
+            .eq('user_id', userId)
+            .single();
           
-          // Only insert to database if authenticated
-          if (!userId.startsWith('anon_')) {
-            const { data: newData, error: insertError } = await supabase
-              .from('user_memory')
-              .insert(newMemory)
-              .select()
-              .single();
-            
-            if (insertError) throw insertError;
-            
-            setUserMemory(newData);
+          // If we get here without error, table exists
+          if (data) {
+            setUserMemory(data);
+          } else if (!error || error.code === 'PGRST116') { // PGRST116 is "no rows returned"
+            // Table exists but no data for this user
+            try {
+              const { data: newData, error: insertError } = await supabase
+                .from('user_memory')
+                .insert(newMemory)
+                .select()
+                .single();
+              
+              if (!insertError) {
+                setUserMemory(newData);
+              } else {
+                // Fall back to local memory if insert fails
+                setUserMemory(newMemory);
+              }
+            } catch (insertErr) {
+              // Fall back to local memory
+              setUserMemory(newMemory);
+            }
           } else {
-            // For anonymous users, just keep in state
+            // Table might not exist, fall back to local memory
             setUserMemory(newMemory);
           }
+          
+          // Try to fetch tool history if table exists
+          try {
+            const { data: historyData } = await supabase
+              .from('tool_usage_history')
+              .select('*')
+              .eq('user_id', userId)
+              .order('created_at', { ascending: false })
+              .limit(10);
+            
+            if (historyData) {
+              setToolHistory(historyData);
+            }
+          } catch (historyErr) {
+            // Table might not exist, use empty array
+            setToolHistory([]);
+          }
+        } catch (dbErr) {
+          // Supabase error, fall back to local memory
+          console.log('Using local memory due to database error');
+          setUserMemory(newMemory);
+          setToolHistory([]);
         }
-        
-        // Fetch tool usage history
-        const { data: historyData, error: historyError } = await supabase
-          .from('tool_usage_history')
-          .select('*')
-          .eq('user_id', userId)
-          .order('created_at', { ascending: false })
-          .limit(10);
-        
-        if (historyError) throw historyError;
-        
-        setToolHistory(historyData || []);
       } catch (err) {
-        console.error('Error fetching user memory:', err);
-        setError('Failed to load user data');
+        console.log('Error in memory system, using defaults');
+        // Create a minimal working memory system
+        setUserMemory({
+          user_id: userId,
+          preferences: {}
+        });
+        setToolHistory([]);
       } finally {
         setIsLoading(false);
       }
@@ -154,8 +190,14 @@ export function useUserMemory() {
       
       setUserMemory(updatedMemory);
       
-      // Only update database if authenticated
-      if (!userId.startsWith('anon_')) {
+      // For anonymous users, always store in localStorage
+      if (userId.startsWith('anon_')) {
+        localStorage.setItem('user_preferences', JSON.stringify(updatedMemory.preferences));
+        return;
+      }
+      
+      // For authenticated users, try Supabase if available
+      try {
         const { error } = await supabase
           .from('user_memory')
           .update({
@@ -164,14 +206,20 @@ export function useUserMemory() {
           })
           .eq('user_id', userId);
         
-        if (error) throw error;
-      } else {
-        // For anonymous users, store in localStorage
+        // If error, might be that table doesn't exist, fall back to localStorage
+        if (error) {
+          localStorage.setItem('user_preferences', JSON.stringify(updatedMemory.preferences));
+        }
+      } catch (err) {
+        // Supabase error, fall back to localStorage
         localStorage.setItem('user_preferences', JSON.stringify(updatedMemory.preferences));
       }
     } catch (err) {
-      console.error('Error updating preferences:', err);
-      setError('Failed to update preferences');
+      console.log('Error updating preferences, using local storage');
+      // Still try to save to localStorage as fallback
+      if (userMemory && userMemory.preferences) {
+        localStorage.setItem('user_preferences', JSON.stringify(userMemory.preferences));
+      }
     }
   };
 
@@ -193,21 +241,44 @@ export function useUserMemory() {
       // Update last tool in preferences
       updatePreferences({ last_tool_id: toolId });
       
-      // Only save to database if authenticated
-      if (!userId.startsWith('anon_')) {
+      // For anonymous users, always store in localStorage
+      if (userId.startsWith('anon_')) {
+        const localHistory = JSON.parse(localStorage.getItem('tool_usage_history') || '[]');
+        localStorage.setItem('tool_usage_history', JSON.stringify([toolUsage, ...localHistory].slice(0, 10)));
+        return;
+      }
+      
+      // For authenticated users, try Supabase if available
+      try {
         const { error } = await supabase
           .from('tool_usage_history')
           .insert(toolUsage);
         
-        if (error) throw error;
-      } else {
-        // For anonymous users, store in localStorage
+        // If error, might be that table doesn't exist, fall back to localStorage
+        if (error) {
+          const localHistory = JSON.parse(localStorage.getItem('tool_usage_history') || '[]');
+          localStorage.setItem('tool_usage_history', JSON.stringify([toolUsage, ...localHistory].slice(0, 10)));
+        }
+      } catch (err) {
+        // Supabase error, fall back to localStorage
         const localHistory = JSON.parse(localStorage.getItem('tool_usage_history') || '[]');
         localStorage.setItem('tool_usage_history', JSON.stringify([toolUsage, ...localHistory].slice(0, 10)));
       }
     } catch (err) {
-      console.error('Error saving tool usage:', err);
-      setError('Failed to save tool usage');
+      console.log('Error saving tool usage, using local storage');
+      try {
+        // Still try to save to localStorage as fallback
+        const localHistory = JSON.parse(localStorage.getItem('tool_usage_history') || '[]');
+        const toolUsage = {
+          user_id: userId,
+          tool_id: toolId,
+          input_params: inputParams,
+          result: result
+        };
+        localStorage.setItem('tool_usage_history', JSON.stringify([toolUsage, ...localHistory].slice(0, 10)));
+      } catch (localErr) {
+        // Even localStorage failed, just continue
+      }
     }
   };
 
