@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ToolSelector, { AVAILABLE_TOOLS, MCPTool } from '@features/prototype/components/ToolSelector';
+import DynamicToolForm from '@features/prototype/components/DynamicToolForm';
+import { useUserMemory } from '@features/prototype/components/UserMemoryManager';
 
-interface TimeValueResult {
-  hourlyRate: number;
-  timeValueInsight: string;
-  chainOfThought: string;
+interface ToolResult {
+  // Generic result interface that can handle different tool outputs
+  [key: string]: any;
+  chainOfThought?: string;
 }
 
 // MCPResultCard Component
-function MCPResultCard({ result }: { result: TimeValueResult }) {
+function MCPResultCard({ result, toolId }: { result: ToolResult; toolId: string }) {
   const [showCoT, setShowCoT] = useState(false);
   
   return (
@@ -37,11 +40,31 @@ function MCPResultCard({ result }: { result: TimeValueResult }) {
         <div className="flex items-baseline mb-2">
           <span className="text-gray-400 text-sm mr-2">Hourly Rate:</span>
           <span className="text-2xl font-bold text-green-400">
-            RM{result.hourlyRate.toFixed(2)}
+            {toolId === 'calculate_time_value' && `RM${result.hourlyRate?.toFixed(2)}`}
+            {toolId === 'compare_time_tradeoffs' && `${result.worthwhile ? 'Worthwhile ✓' : 'Not Worthwhile ✗'}`}
+            {toolId === 'task_outsource_advisor' && `RM${result.taskValue?.toFixed(2)}`}
           </span>
         </div>
         
-        <p className="text-gray-300">{result.timeValueInsight}</p>
+        <p className="text-gray-300">
+          {toolId === 'calculate_time_value' && result.timeValueInsight}
+          {toolId === 'compare_time_tradeoffs' && result.recommendation}
+          {toolId === 'task_outsource_advisor' && result.recommendation}
+        </p>
+        
+        {/* Additional info for specific tools */}
+        {toolId === 'task_outsource_advisor' && result.outsourcingPlatforms && (
+          <div className="mt-2">
+            <p className="text-sm text-gray-400">Recommended platforms:</p>
+            <div className="flex flex-wrap gap-2 mt-1">
+              {result.outsourcingPlatforms.map((platform: string) => (
+                <span key={platform} className="px-2 py-1 bg-gray-700 rounded-md text-xs">
+                  {platform}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
       
       {showCoT && (
@@ -57,15 +80,29 @@ function MCPResultCard({ result }: { result: TimeValueResult }) {
 }
 
 // PostRunActions Component
-function PostRunActions({ result }: { result: TimeValueResult }) {
+function PostRunActions({ result, toolId }: { result: ToolResult; toolId: string }) {
   const [activeTab, setActiveTab] = useState<string>('link');
   const [copied, setCopied] = useState<boolean>(false);
   const [reminderEmail, setReminderEmail] = useState<string>('');
   const [reminderTime, setReminderTime] = useState<string>('09:00');
   const [reminderSubmitted, setReminderSubmitted] = useState<boolean>(false);
 
+  // Generate shareable link based on tool type
+  const getShareableLink = () => {
+    switch (toolId) {
+      case 'calculate_time_value':
+        return `https://coreframeai.com/mcp/run?tool=calculate_time_value&monthly_income=${encodeURIComponent(result.hourlyRate * 40 * 4)}&working_hours=${encodeURIComponent(40)}`;
+      case 'compare_time_tradeoffs':
+        return `https://coreframeai.com/mcp/run?tool=compare_time_tradeoffs&hourly_rate=${encodeURIComponent(result.hourlyRate)}&activity_cost=${encodeURIComponent(result.activityCost)}&activity_duration=${encodeURIComponent(result.activityDurationHours)}`;
+      case 'task_outsource_advisor':
+        return `https://coreframeai.com/mcp/run?tool=task_outsource_advisor&hourly_rate=${encodeURIComponent(result.hourlyRate)}&task=${encodeURIComponent(result.taskDescription)}&hours=${encodeURIComponent(result.estimatedHours)}`;
+      default:
+        return `https://coreframeai.com/mcp/run?tool=${encodeURIComponent(toolId)}`;
+    }
+  };
+  
   const handleCopyLink = () => {
-    const shareableLink = `https://coreframeai.com/mcp/run?tool=calculate_time_value&monthly_income=${encodeURIComponent(result.hourlyRate * 40 * 4)}&working_hours=${encodeURIComponent(40)}`;
+    const shareableLink = getShareableLink();
     navigator.clipboard.writeText(shareableLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
@@ -138,7 +175,7 @@ function PostRunActions({ result }: { result: TimeValueResult }) {
               <input
                 type="text"
                 readOnly
-                value={`https://coreframeai.com/mcp/run?tool=calculate_time_value&monthly_income=${result.hourlyRate * 40 * 4}&working_hours=40`}
+                value={getShareableLink()}
                 className="flex-grow px-4 py-2 bg-gray-800 border border-gray-700 rounded-l-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
               />
               <button
@@ -171,7 +208,12 @@ async function calculateTimeValue(monthlyIncome, workingHours) {
 }
 
 // Example usage
-const result = await calculateTimeValue(${result.hourlyRate * 40 * 4}, 40);
+// Dynamic example based on tool type
+${toolId === 'calculate_time_value' ? 
+`const result = await calculateTimeValue(${result.hourlyRate * 40 * 4}, 40);` : 
+toolId === 'compare_time_tradeoffs' ? 
+`const result = await compareTimeTradeoffs(${result.hourlyRate}, ${result.activityCost}, ${result.activityDurationHours});` : 
+`const result = await taskOutsourceAdvisor(${result.hourlyRate}, "${result.taskDescription.replace(/"/g, '\"')}", ${result.estimatedHours});`}
 console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
               </pre>
               <div className="mt-4">
@@ -206,7 +248,9 @@ console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
                 Your time is worth
               </div>
               <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-2">
-                RM{result.hourlyRate.toFixed(2)}/hour
+                {toolId === 'calculate_time_value' && `RM${result.hourlyRate.toFixed(2)}/hour`}
+                {toolId === 'compare_time_tradeoffs' && `${result.worthwhile ? 'Worth your time!' : 'Not worth your time!'}`}
+                {toolId === 'task_outsource_advisor' && `RM${result.taskValue.toFixed(2)} task value`}
               </div>
               <div className="text-lg text-gray-300">
                 Focus on high-value activities
@@ -285,7 +329,7 @@ console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
                 </svg>
                 <h4 className="text-lg font-medium text-white mb-1">Reminder Set!</h4>
                 <p className="text-green-300">
-                  You&apos;ll receive a daily reminder at {reminderTime} about your time value.
+                  You&apos;ll receive a daily reminder at {reminderTime} about your {toolId === 'calculate_time_value' ? 'time value' : toolId === 'compare_time_tradeoffs' ? 'time tradeoffs' : 'outsourcing opportunities'}.
                 </p>
               </div>
             )}
@@ -298,55 +342,235 @@ console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
 
 // Main MCPPlayground Page Component
 export default function MCPPlaygroundPage() {
-  const [monthlyIncome, setMonthlyIncome] = useState<string>('');
-  const [workingHours, setWorkingHours] = useState<string>('');
-  const [result, setResult] = useState<TimeValueResult | null>(null);
+  // Get the user memory manager
+  const {
+    userId,
+    userMemory,
+    toolHistory,
+    isLoading: memoryLoading,
+    error: memoryError,
+    updatePreferences,
+    saveToolUsage,
+    getLastToolValues
+  } = useUserMemory();
+
+  // State for the selected tool and results
+  const [selectedToolId, setSelectedToolId] = useState<string>('calculate_time_value');
+  const [result, setResult] = useState<ToolResult | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // Get the selected tool object
+  const selectedTool = AVAILABLE_TOOLS.find(tool => tool.id === selectedToolId) || AVAILABLE_TOOLS[0];
+  
+  // Load last used tool from user memory
+  useEffect(() => {
+    if (userMemory?.preferences?.last_tool_id) {
+      const toolExists = AVAILABLE_TOOLS.some(tool => tool.id === userMemory.preferences.last_tool_id);
+      if (toolExists) {
+        setSelectedToolId(userMemory.preferences.last_tool_id);
+      }
+    }
+  }, [userMemory]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  // Handle tool selection
+  const handleSelectTool = (toolId: string) => {
+    setSelectedToolId(toolId);
+    setResult(null);
+    setError(null);
+    
+    // Save preference to user memory
+    if (userId) {
+      updatePreferences({ last_tool_id: toolId });
+    }
+  };
+
+  // Handle form submission for any tool
+  const handleToolSubmit = async (values: Record<string, any>) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      // In a real implementation, this would call an actual API endpoint
-      // For now, we'll simulate the calculation and response
-      const income = parseFloat(monthlyIncome);
-      const hours = parseFloat(workingHours);
+      // In a real implementation, this would call the actual API endpoint for the selected tool
+      // For now, we'll simulate the response based on the tool type
       
-      if (isNaN(income) || isNaN(hours) || income <= 0 || hours <= 0) {
-        throw new Error('Please enter valid positive numbers for income and working hours');
-      }
-
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Calculate hourly rate
-      const hourlyRate = (income * 12) / (hours * 52);
+      let toolResult: ToolResult;
       
-      // Generate insight
-      const timeValueInsight = generateInsight(hourlyRate);
+      // Handle different tools
+      switch (selectedTool.id) {
+        case 'calculate_time_value':
+          toolResult = simulateTimeValueCalculation(values.monthly_income, values.working_hours_per_week);
+          break;
+          
+        case 'compare_time_tradeoffs':
+          toolResult = simulateTimeTradeoffAnalysis(values.hourly_rate, values.activity_cost, values.activity_duration_hours);
+          break;
+          
+        case 'task_outsource_advisor':
+          toolResult = simulateOutsourcingAdvice(values.hourly_rate, values.task_description, values.estimated_hours);
+          break;
+          
+        default:
+          throw new Error('Unknown tool selected');
+      }
       
-      // Simulate chain of thought
-      const chainOfThought = `
-1. Received query with monthly_income=${income} and working_hours_per_week=${hours}
-2. Calculated annual income: ${income} * 12 = ${income * 12}
-3. Calculated annual working hours: ${hours} * 52 = ${hours * 52}
-4. Computed hourly rate: ${income * 12} / ${hours * 52} = ${hourlyRate.toFixed(2)}
-5. Generated insight based on hourly rate value
-`;
-
-      setResult({
-        hourlyRate,
-        timeValueInsight,
-        chainOfThought
-      });
+      setResult(toolResult);
+      
+      // Save tool usage to user memory
+      if (userId) {
+        saveToolUsage(selectedTool.id, values, toolResult);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
+  };
+  
+  // Simulation functions for different tools
+  const simulateTimeValueCalculation = (monthlyIncome: number, workingHoursPerWeek: number): ToolResult => {
+    if (isNaN(monthlyIncome) || isNaN(workingHoursPerWeek) || monthlyIncome <= 0 || workingHoursPerWeek <= 0) {
+      throw new Error('Please enter valid positive numbers for income and working hours');
+    }
+    
+    // Calculate hourly rate
+    const hourlyRate = (monthlyIncome * 12) / (workingHoursPerWeek * 52);
+    
+    // Generate insight
+    const timeValueInsight = generateInsight(hourlyRate);
+    
+    // Simulate chain of thought
+    const chainOfThought = `
+1. Received query with monthly_income=${monthlyIncome} and working_hours_per_week=${workingHoursPerWeek}
+2. Calculated annual income: ${monthlyIncome} * 12 = ${monthlyIncome * 12}
+3. Calculated annual working hours: ${workingHoursPerWeek} * 52 = ${workingHoursPerWeek * 52}
+4. Computed hourly rate: ${monthlyIncome * 12} / ${workingHoursPerWeek * 52} = ${hourlyRate.toFixed(2)}
+5. Generated insight based on hourly rate value
+`;
+
+    return {
+      hourlyRate,
+      timeValueInsight,
+      chainOfThought
+    };
+  };
+  
+  const simulateTimeTradeoffAnalysis = (hourlyRate: number, activityCost: number, activityDurationHours: number): ToolResult => {
+    if (isNaN(hourlyRate) || isNaN(activityCost) || isNaN(activityDurationHours) || 
+        hourlyRate <= 0 || activityCost < 0 || activityDurationHours <= 0) {
+      throw new Error('Please enter valid positive numbers');
+    }
+    
+    // Calculate time value of the activity
+    const timeValue = hourlyRate * activityDurationHours;
+    const netValue = timeValue - activityCost;
+    const worthwhile = netValue > 0;
+    
+    // Generate recommendation
+    const recommendation = worthwhile
+      ? `This activity is worth your time. You'll gain a net value of RM${netValue.toFixed(2)}.`
+      : `This activity may not be worth your time. You'll lose a net value of RM${Math.abs(netValue).toFixed(2)}.`;
+    
+    // Simulate chain of thought
+    const chainOfThought = `
+1. Received query with hourly_rate=${hourlyRate}, activity_cost=${activityCost}, and activity_duration_hours=${activityDurationHours}
+2. Calculated time value: ${hourlyRate} * ${activityDurationHours} = ${timeValue.toFixed(2)}
+3. Calculated net value: ${timeValue.toFixed(2)} - ${activityCost} = ${netValue.toFixed(2)}
+4. Determined if activity is worthwhile: ${worthwhile ? 'Yes' : 'No'}
+5. Generated recommendation based on net value
+`;
+
+    return {
+      hourlyRate,
+      activityCost,
+      activityDurationHours,
+      timeValue,
+      netValue,
+      worthwhile,
+      recommendation,
+      chainOfThought
+    };
+  };
+  
+  const simulateOutsourcingAdvice = (hourlyRate: number, taskDescription: string, estimatedHours: number): ToolResult => {
+    if (isNaN(hourlyRate) || isNaN(estimatedHours) || hourlyRate <= 0 || estimatedHours <= 0) {
+      throw new Error('Please enter valid positive numbers');
+    }
+    
+    if (!taskDescription.trim()) {
+      throw new Error('Please provide a task description');
+    }
+    
+    // Calculate task value
+    const taskValue = hourlyRate * estimatedHours;
+    
+    // Generate outsourcing thresholds
+    const lowThreshold = hourlyRate * 0.3;
+    const highThreshold = hourlyRate * 0.7;
+    
+    // Generate recommendation based on task complexity and value
+    let recommendation = '';
+    let outsourcingPlatforms = [];
+    
+    const taskWords = taskDescription.toLowerCase().split(' ');
+    const isCreative = taskWords.some(word => ['design', 'write', 'create', 'develop', 'creative'].includes(word));
+    const isTechnical = taskWords.some(word => ['code', 'program', 'technical', 'data', 'analysis'].includes(word));
+    const isAdmin = taskWords.some(word => ['organize', 'schedule', 'email', 'research', 'admin'].includes(word));
+    
+    if (isCreative) {
+      recommendation = `This creative task is worth RM${taskValue.toFixed(2)} of your time. `;
+      if (taskValue > 500) {
+        recommendation += 'Consider hiring a specialized professional for high-quality results.';
+        outsourcingPlatforms = ['Upwork (Premium)', 'Fiverr Pro', 'Toptal'];
+      } else {
+        recommendation += 'You can outsource this to a freelancer at a competitive rate.';
+        outsourcingPlatforms = ['Fiverr', 'Upwork', '99designs'];
+      }
+    } else if (isTechnical) {
+      recommendation = `This technical task is worth RM${taskValue.toFixed(2)} of your time. `;
+      if (taskValue > 1000) {
+        recommendation += 'For complex technical work, consider a specialized agency or experienced contractor.';
+        outsourcingPlatforms = ['Toptal', 'GitHub Jobs', 'Stack Overflow Jobs'];
+      } else {
+        recommendation += 'You can find qualified technical freelancers online.';
+        outsourcingPlatforms = ['Upwork', 'Fiverr', 'Freelancer'];
+      }
+    } else if (isAdmin) {
+      recommendation = `This administrative task is worth RM${taskValue.toFixed(2)} of your time. `;
+      recommendation += 'This is ideal for delegation to a virtual assistant.';
+      outsourcingPlatforms = ['Upwork', 'Fiverr', 'Virtual Staff Finder'];
+    } else {
+      recommendation = `This task is worth RM${taskValue.toFixed(2)} of your time. `;
+      if (taskValue > 200) {
+        recommendation += 'Consider outsourcing to free up your time for higher-value activities.';
+      } else {
+        recommendation += 'For small tasks, weigh the coordination cost against the time saved.';
+      }
+      outsourcingPlatforms = ['Upwork', 'Fiverr', 'TaskRabbit'];
+    }
+    
+    // Simulate chain of thought
+    const chainOfThought = `
+1. Received query with hourly_rate=${hourlyRate}, task_description="${taskDescription}", and estimated_hours=${estimatedHours}
+2. Calculated task value: ${hourlyRate} * ${estimatedHours} = ${taskValue.toFixed(2)}
+3. Analyzed task description for type: ${isCreative ? 'Creative' : isTechnical ? 'Technical' : isAdmin ? 'Administrative' : 'General'}
+4. Determined outsourcing thresholds: Low=${lowThreshold.toFixed(2)}, High=${highThreshold.toFixed(2)}
+5. Generated recommendation and suggested platforms based on task type and value
+`;
+
+    return {
+      hourlyRate,
+      taskDescription,
+      estimatedHours,
+      taskValue,
+      taskType: isCreative ? 'Creative' : isTechnical ? 'Technical' : isAdmin ? 'Administrative' : 'General',
+      recommendation,
+      outsourcingPlatforms,
+      chainOfThought
+    };
   };
 
   const generateInsight = (hourlyRate: number): string => {
@@ -374,52 +598,35 @@ export default function MCPPlaygroundPage() {
           </p>
         </div>
 
+        {/* User greeting if authenticated */}
+        {userId && !userId.startsWith('anon_') && userMemory && (
+          <div className="mb-8 text-right">
+            <p className="text-sm text-gray-400">
+              Welcome back! Your preferences and tool history are saved.
+            </p>
+          </div>
+        )}
+
+        {/* Tool Selector */}
+        <ToolSelector 
+          selectedToolId={selectedToolId} 
+          onSelectTool={handleSelectTool} 
+        />
+
         {/* Tool Interaction Section */}
         <div className="bg-gray-900 rounded-xl p-6 mb-12 shadow-xl">
-          <h2 className="text-2xl font-semibold mb-6">Calculate Time Value</h2>
+          <h2 className="text-2xl font-semibold mb-6">{selectedTool.name}</h2>
           <p className="text-gray-400 mb-6">
-            Compute the value of your time based on income and working hours.
+            {selectedTool.description}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="monthlyIncome" className="block text-sm font-medium text-gray-300 mb-1">
-                Monthly Income (RM)
-              </label>
-              <input
-                type="number"
-                id="monthlyIncome"
-                value={monthlyIncome}
-                onChange={(e) => setMonthlyIncome(e.target.value)}
-                placeholder="e.g., 5000"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="workingHours" className="block text-sm font-medium text-gray-300 mb-1">
-                Working Hours Per Week
-              </label>
-              <input
-                type="number"
-                id="workingHours"
-                value={workingHours}
-                onChange={(e) => setWorkingHours(e.target.value)}
-                placeholder="e.g., 40"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                required
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-md hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 transition-colors"
-            >
-              {isLoading ? 'Calculating...' : 'Calculate Time Value'}
-            </button>
-          </form>
+          {/* Dynamic Form based on selected tool */}
+          <DynamicToolForm
+            tool={selectedTool}
+            onSubmit={handleToolSubmit}
+            isLoading={isLoading}
+            savedValues={getLastToolValues(selectedTool.id)}
+          />
 
           {error && (
             <div className="mt-6 p-4 bg-red-900/50 border border-red-700 rounded-md text-red-200">
@@ -428,11 +635,11 @@ export default function MCPPlaygroundPage() {
           )}
 
           {/* Result Display */}
-          {result && <MCPResultCard result={result} />}
+          {result && <MCPResultCard result={result} toolId={selectedToolId} />}
         </div>
 
         {/* Post-Execution Section */}
-        {result && <PostRunActions result={result} />}
+        {result && <PostRunActions result={result} toolId={selectedToolId} />}
 
         {/* Optional Section: Create Your Own MCP Tool */}
         <div className="mt-16 text-center">
