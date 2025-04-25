@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import ToolSelector, { AVAILABLE_TOOLS, MCPTool } from '@features/prototype/components/ToolSelector';
 import DynamicToolForm from '@features/prototype/components/DynamicToolForm';
-import { useUserMemory } from '@features/prototype/components/UserMemoryManager';
+import { useOptimizedMemory } from '@/features/prototype/components/OptimizedMemoryManager';
 
 interface ToolResult {
   // Generic result interface that can handle different tool outputs
@@ -343,16 +343,14 @@ console.log(\`Your time is worth RM\${result.hourly_rate}/hour\`);`}
 // Main MCPPlayground Page Component
 export default function MCPPlaygroundPage() {
   // Get the user memory manager
-  const {
-    userId,
-    userMemory,
-    toolHistory,
-    isLoading: memoryLoading,
-    error: memoryError,
-    updatePreferences,
-    saveToolUsage,
-    getLastToolValues
-  } = useUserMemory();
+  const { 
+    userId, 
+    userMemory, 
+    updatePreferences, 
+    saveToolUsage, 
+    getLastToolValues,
+    isLoading: memoryLoading
+  } = useOptimizedMemory();
 
   // State for the selected tool and results
   const [selectedToolId, setSelectedToolId] = useState<string>('calculate_time_value');
