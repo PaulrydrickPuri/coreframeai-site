@@ -1,7 +1,7 @@
 import Hero from "@shared/components/organisms/Hero";
 import Navbar from "@shared/components/organisms/Navbar";
-import WorkflowButtons from "@features/landing/components/WorkflowButtons";
 import ScrollIndicator from "@shared/components/atoms/ScrollIndicator";
+import ProjectHub from "@shared/components/organisms/ProjectHub";
 
 export default function HomePage() {
   return (
@@ -9,7 +9,7 @@ export default function HomePage() {
       <Navbar />
       <ScrollIndicator />
       <Hero />
-      <WorkflowButtons />
+      <ProjectHub />
     </div>
   );
 }
