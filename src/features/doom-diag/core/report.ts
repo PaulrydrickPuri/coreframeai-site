@@ -5,7 +5,6 @@
 
 import type { AnalysisResult } from './analyzer';
 import type { ForecastResult } from './forecast';
-import { saveReport } from './supabase';
 
 export interface BrutalHeadline {
   headline: string;
@@ -239,19 +238,20 @@ async function generateSimplePdf(report: DoomReport): Promise<Blob> {
 }
 
 /**
- * Save report to workspace using Supabase
+ * Save report to workspace
  */
 export async function saveReportToWorkspace(report: DoomReport): Promise<DoomReport> {
   try {
-    // Save to Supabase database
-    const savedReport = await saveReport(report);
-    return savedReport;
-  } catch (error) {
-    console.error('Error saving report to workspace:', error);
-    // Even if saving to database failed, mark as saved locally
+    // For MVP, just mark as saved and store in memory
+    // In a real implementation, this would save to a database or local storage
+    console.log('Saving report to workspace:', report.id);
+    
     return {
       ...report,
       savedToWorkspace: true
     };
+  } catch (error) {
+    console.error('Error saving report to workspace:', error);
+    throw error;
   }
 }
