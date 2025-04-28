@@ -1,0 +1,22 @@
+Date,Type,Category,Description,Amount
+2025-01-05,Revenue,Services,Legacy Service Clients,45000
+2025-01-08,Revenue,Product Sales,New SaaS Product,12000
+2025-01-10,Cost,Operations,Office and Equipment,15000
+2025-01-15,Cost,Personnel,Team Payroll,35000
+2025-01-20,Cost,Marketing,Rebranding Campaign,18000
+2025-01-25,Cost,Software,Development & Hosting,8500
+2025-01-30,Cost,Professional,Legal & Accounting,4000
+2025-02-05,Revenue,Services,Legacy Service Clients,42000
+2025-02-08,Revenue,Product Sales,New SaaS Product,15000
+2025-02-10,Cost,Operations,Office and Equipment,15000
+2025-02-15,Cost,Personnel,Team Payroll,36000
+2025-02-20,Cost,Marketing,Digital Acquisition,12000
+2025-02-25,Cost,Software,Development & Hosting,9000
+2025-02-28,Cost,Professional,Legal & Accounting,3500
+2025-03-05,Revenue,Services,Legacy Service Clients,38000
+2025-03-08,Revenue,Product Sales,New SaaS Product,19000
+2025-03-10,Cost,Operations,Office and Equipment,15000
+2025-03-15,Cost,Personnel,Team Payroll,37000
+2025-03-20,Cost,Marketing,Customer Retention,10000
+2025-03-25,Cost,Software,Development & Hosting,9500
+2025-03-30,Cost,Professional,Legal & Accounting,3000

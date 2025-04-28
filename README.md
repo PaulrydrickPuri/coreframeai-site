@@ -18,6 +18,12 @@ src/
 └── styles/             # Global styles
 ```
 
+| Path | Purpose |
+| ------------------------------------ | ------------------------------------------------- |
+| `packages/doom-diag-core/`           | Extraction, analysis, forecast, report builders   |
+| `packages/doom-diag-ui/`             | React components for Brutal-Report UI            |
+| `apps/site/pages/projects/doom-diag/`| Next.js page & API routes                         |
+
 ## Included:
 - Feature-based architecture
 - Tailwind-ready styles

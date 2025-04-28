@@ -203,6 +203,20 @@ const experimentalProjects: ProjectCard[] = [
     deltaChange: undefined
   },
   {
+    id: 'doom-diag',
+    title: 'Brutal-Truth Diagnostics',
+    description: 'Drop ledgers → get painful truths & a Doom Clock',
+    icon: '💀',
+    color: 'from-red-600 to-red-400',
+    href: '/projects/doom-diag',
+    status: 'experimental',
+    stages: ['Map','Encode','Navigate','Test','Amplify','Learn'],
+    dateCreated: 'April 28, 2025',
+    loopNumber: 20,
+    summary: 'Alpha: extractor, 5 brutal headlines, Doom Clock, fix suggestions.',
+    actions: ['view']
+  },
+  {
     id: 'analytics-dashboard',
     title: 'Analytics Dashboard',
     description: 'Track performance metrics for all your cognitive workflows',

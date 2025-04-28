@@ -1,0 +1,19 @@
+Date,Type,Category,Description,Amount
+2025-01-05,Revenue,Product Sales,Product A - Monthly Subscriptions,15000
+2025-01-10,Cost,Office,Office Rent,8000
+2025-01-15,Cost,Personnel,Employee Salaries,12000
+2025-01-20,Cost,Marketing,Digital Marketing Campaigns,3000
+2025-01-25,Cost,Software,SaaS Subscriptions,1500
+2025-01-30,Revenue,Services,Consulting Services,5000
+2025-02-05,Revenue,Product Sales,Product A - Monthly Subscriptions,16500
+2025-02-10,Cost,Office,Office Rent,8000
+2025-02-15,Cost,Personnel,Employee Salaries,13000
+2025-02-20,Cost,Marketing,Digital Marketing Campaigns,3500
+2025-02-25,Cost,Software,SaaS Subscriptions,1500
+2025-02-28,Revenue,Services,Consulting Services,5500
+2025-03-05,Revenue,Product Sales,Product A - Monthly Subscriptions,18200
+2025-03-10,Cost,Office,Office Rent,8000
+2025-03-15,Cost,Personnel,Employee Salaries,14000
+2025-03-20,Cost,Marketing,Digital Marketing Campaigns,4000
+2025-03-25,Cost,Software,SaaS Subscriptions,1700
+2025-03-30,Revenue,Services,Consulting Services,6000

@@ -1,0 +1,181 @@
+/**
+ * Test Runner for Doom-Diag
+ * This script helps test our financial data processing with the test CSV files
+ */
+
+import fs from 'fs';
+import path from 'path';
+import { extractFinancialData } from './extractor';
+import { analyzeFinancialData } from './analyzer';
+import { generateForecast } from './forecast';
+import { generateBrutalHeadlines } from './prompts';
+import { assembleReport } from './report';
+
+// Browser File class mock for Node.js environment
+class MockFile implements Blob {
+  name: string;
+  lastModified: number;
+  type: string;
+  size: number;
+  private content: Buffer;
+
+  constructor(content: Buffer, name: string, type: string) {
+    this.content = content;
+    this.name = name;
+    this.type = type;
+    this.size = content.length;
+    this.lastModified = Date.now();
+  }
+
+  slice(start?: number, end?: number, contentType?: string): Blob {
+    return new MockFile(
+      this.content.slice(start, end),
+      this.name,
+      contentType || this.type
+    );
+  }
+
+  stream() {
+    throw new Error('Method not implemented.');
+  }
+
+  text() {
+    return Promise.resolve(this.content.toString('utf-8'));
+  }
+
+  arrayBuffer() {
+    return Promise.resolve(this.content.buffer);
+  }
+}
+
+/**
+ * Process a single test file
+ */
+async function processTestFile(filePath: string) {
+  try {
+    console.log(`\n\n========= Processing ${path.basename(filePath)} =========`);
+    
+    // Read file content
+    const content = fs.readFileSync(filePath);
+    const mockFile = new MockFile(content, path.basename(filePath), 'text/csv');
+    
+    // Extract data
+    console.log('Extracting financial data...');
+    const extractedData = await extractFinancialData({
+      source: mockFile as any,
+      format: 'csv',
+      maxSizeBytes: 5 * 1024 * 1024
+    });
+    
+    console.log(`Extracted ${extractedData.revenues.length} revenue entries and ${extractedData.costs.length} cost entries`);
+    
+    // Analyze data
+    console.log('Analyzing financial data...');
+    const analysis = await analyzeFinancialData(extractedData);
+    
+    console.log(`Total Revenue: ${analysis.totalRevenue}`);
+    console.log(`Total Costs: ${analysis.totalCosts}`);
+    console.log(`Burn Rate: ${analysis.burnRate}/month`);
+    console.log(`Runway: ${analysis.runway} days`);
+    
+    // Generate forecast
+    console.log('Generating forecast...');
+    const forecast = generateForecast(analysis);
+    
+    console.log(`Doom Clock: ${forecast.doomDays} days remaining`);
+    console.log(`Optimistic: ${forecast.scenarioProjections.optimistic} days`);
+    console.log(`Pessimistic: ${forecast.scenarioProjections.pessimistic} days`);
+    
+    if (forecast.breakEvenPoint.possible) {
+      console.log(`Break Even: Possible in ${forecast.breakEvenPoint.daysToBreakEven} days`);
+    } else {
+      console.log(`Break Even: Not possible without changes`);
+      console.log(`Required Growth Rate: ${forecast.breakEvenPoint.requiredGrowthRate}%`);
+    }
+    
+    // Generate headlines (mock without API call)
+    console.log('Generating brutal headlines...');
+    
+    // Create mock headlines based on analysis
+    const mockHeadlines = [
+      {
+        headline: `Runway critical: Cash zero in ${forecast.doomDays} days`,
+        action: "Implement immediate spending freeze on all non-essential expenses",
+        impact: analysis.totalCosts * 0.15,
+        confidence: 0.9
+      },
+      {
+        headline: `Burn rate unsustainable: ${analysis.burnRate} per month exceeds revenue`,
+        action: "Cut bottom 20% of underperforming cost centers within 7 days",
+        impact: analysis.burnRate * 0.2,
+        confidence: 0.85
+      },
+      {
+        headline: "Revenue growth stalled while expenses continue to climb",
+        action: "Revise pricing strategy and implement 10% increase across all services",
+        impact: "10%",
+        confidence: 0.7
+      },
+      {
+        headline: "No emergency reserves: Operating at 100% cash utilization",
+        action: "Secure bridge funding or negotiate extended payment terms with vendors",
+        impact: analysis.burnRate * 0.5,
+        confidence: 0.6
+      },
+      {
+        headline: "Cost structure misaligned with revenue model",
+        action: "Restructure team to match current revenue capacity, not future projections",
+        impact: analysis.totalCosts * 0.25,
+        confidence: 0.8
+      }
+    ];
+    
+    // Assemble report
+    console.log('Assembling final report...');
+    const report = assembleReport(
+      { name: path.basename(filePath), type: 'text/csv' },
+      analysis,
+      forecast,
+      mockHeadlines
+    );
+    
+    // Output summary
+    console.log('\n------- SUMMARY -------');
+    console.log(`File: ${report.fileName}`);
+    console.log(`Doom Clock: ${report.doomClock.daysRemaining} days remaining`);
+    console.log('Brutal Headlines:');
+    report.brutalHeadlines.forEach((headline, index) => {
+      console.log(`  ${index + 1}. ${headline.headline}`);
+      console.log(`     - Action: ${headline.action}`);
+      console.log(`     - Impact: ${headline.impact}`);
+    });
+    
+    return report;
+  } catch (error) {
+    console.error('Error processing test file:', error);
+    throw error;
+  }
+}
+
+/**
+ * Main function to run tests
+ */
+async function runTests() {
+  try {
+    const fixturesDir = path.join(__dirname, '../fixtures');
+    const files = fs.readdirSync(fixturesDir)
+                    .filter(file => file.endsWith('.csv'))
+                    .map(file => path.join(fixturesDir, file));
+    
+    for (const file of files) {
+      await processTestFile(file);
+    }
+    
+    console.log('\nAll tests completed successfully!');
+  } catch (error) {
+    console.error('Test runner error:', error);
+  }
+}
+
+// Run the tests
+runTests();

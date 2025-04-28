@@ -1,0 +1,19 @@
+Date,Type,Category,Description,Amount
+2025-01-05,Revenue,Product Sales,Product B - License Sales,25000
+2025-01-10,Cost,Office,Office Rent + Utilities,12000
+2025-01-15,Cost,Personnel,Employee Salaries and Benefits,30000
+2025-01-20,Cost,Marketing,Trade Show Expenses,8000
+2025-01-25,Cost,Software,Enterprise Software Licenses,5000
+2025-01-30,Revenue,Services,Implementation Services,10000
+2025-02-05,Revenue,Product Sales,Product B - License Sales,20000
+2025-02-10,Cost,Office,Office Rent + Utilities,12000
+2025-02-15,Cost,Personnel,Employee Salaries and Benefits,32000
+2025-02-20,Cost,Marketing,Trade Show Expenses,6000
+2025-02-25,Cost,Software,Enterprise Software Licenses,5000
+2025-02-28,Revenue,Services,Implementation Services,8000
+2025-03-05,Revenue,Product Sales,Product B - License Sales,15000
+2025-03-10,Cost,Office,Office Rent + Utilities,12000
+2025-03-15,Cost,Personnel,Employee Salaries and Benefits,34000
+2025-03-20,Cost,Marketing,Trade Show Expenses,7000
+2025-03-25,Cost,Software,Enterprise Software Licenses,5000
+2025-03-30,Revenue,Services,Implementation Services,6000

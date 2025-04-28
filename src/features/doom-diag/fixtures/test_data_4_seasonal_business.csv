@@ -1,0 +1,19 @@
+Date,Type,Category,Description,Amount
+2025-01-05,Revenue,Product Sales,Winter Collection Sales,85000
+2025-01-10,Cost,Operations,Warehouse Rent,10000
+2025-01-15,Cost,Personnel,Staff Salaries,25000
+2025-01-20,Cost,Marketing,Seasonal Promotion,12000
+2025-01-25,Cost,Inventory,Inventory Purchase for Spring,40000
+2025-01-30,Cost,Utilities,Electricity and Heating,3500
+2025-02-05,Revenue,Product Sales,Winter Clearance,30000
+2025-02-10,Cost,Operations,Warehouse Rent,10000
+2025-02-15,Cost,Personnel,Staff Salaries,25000
+2025-02-20,Cost,Marketing,Spring Preview Campaign,15000
+2025-02-25,Cost,Inventory,Additional Spring Inventory,35000
+2025-02-28,Cost,Utilities,Electricity and Heating,3200
+2025-03-05,Revenue,Product Sales,Spring Collection Launch,45000
+2025-03-10,Cost,Operations,Warehouse Rent,10000
+2025-03-15,Cost,Personnel,Staff Salaries,25000
+2025-03-20,Cost,Marketing,Spring Promotion,18000
+2025-03-25,Cost,Inventory,Initial Summer Inventory,30000
+2025-03-30,Cost,Utilities,Electricity and Heating,2800

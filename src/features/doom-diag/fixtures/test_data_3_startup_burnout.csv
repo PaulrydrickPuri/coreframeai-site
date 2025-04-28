@@ -1,0 +1,19 @@
+Date,Type,Category,Description,Amount
+2025-01-01,Revenue,Funding,Seed Investment Round,500000
+2025-01-10,Cost,Office,Co-working Space Membership,3000
+2025-01-15,Cost,Personnel,Founder Salaries (3 people),30000
+2025-01-20,Cost,Marketing,Product Launch Campaign,25000
+2025-01-25,Cost,Software,Development Tools and Services,8000
+2025-01-30,Revenue,Product Sales,Beta Customer Revenue,5000
+2025-02-10,Cost,Office,Co-working Space Membership,3000
+2025-02-15,Cost,Personnel,Founder Salaries (3 people),30000
+2025-02-17,Cost,Personnel,New Developer Hire,12000
+2025-02-20,Cost,Marketing,Online Advertising,15000
+2025-02-25,Cost,Software,Development Tools and Services,8000
+2025-02-28,Revenue,Product Sales,Early Customer Revenue,12000
+2025-03-10,Cost,Office,Co-working Space Membership,3000
+2025-03-15,Cost,Personnel,Team Salaries (4 people),42000
+2025-03-20,Cost,Marketing,Customer Acquisition,20000
+2025-03-25,Cost,Software,Development Tools and Services,8000
+2025-03-28,Cost,Operations,Legal and Accounting,15000
+2025-03-30,Revenue,Product Sales,Customer Revenue,18000
