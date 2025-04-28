@@ -19,7 +19,7 @@ export default function DropZone({
 }: DropZoneProps) {
   const [error, setError] = useState<string | null>(null);
   
-  const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[], event: DropEvent) => {
+  const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[], _event: DropEvent) => {
     // Clear previous errors
     setError(null);
     

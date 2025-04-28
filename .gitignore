@@ -50,3 +50,4 @@ postcss.config.js
 *.rej
 *.merge
 *.tsbuildinfo
+.vercel

@@ -9,9 +9,21 @@ import * as path from 'path';
 import * as os from 'os';
 import { v4 as uuidv4 } from 'uuid';
 
+// Define ExtractedData to avoid any
+interface ExtractedData {
+  revenues: Array<{ amount: number; date: string; description: string }>;
+  costs: Array<{ amount: number; date: string; description: string }>;
+  dates: string[];
+  metadata: {
+    fileName: string;
+    extractionTime: string;
+    rowCount: number;
+  };
+}
+
 // Mock extraction function to simulate Python+Camelot processing
 // In the real implementation, this would use Python bindings
-async function extractDataFromFile(filePath: string, fileType: string): Promise<any> {
+async function extractDataFromFile(filePath: string, fileType: string): Promise<ExtractedData> {
   console.log(`Extracting data from ${fileType} file: ${filePath}`);
   
   // In a real implementation, this would use camelot-py or similar

@@ -299,15 +299,16 @@ const TimelineEntry: React.FC<{ project: ProjectCard, index: number }> = ({ proj
       <div className="mb-4">
         <div className="text-sm text-gray-400 mb-2">🔁 Loop Progression:</div>
         <div className="flex items-center space-x-1">
-          {['Map', 'Encode', 'Navigate', 'Test', 'Amplify', 'Learn'].map((stage, i) => {
-            const isActive = project.stages?.includes(stage as any);
+          {(['Map', 'Encode', 'Navigate', 'Test', 'Amplify', 'Learn'] as const).map((stage, i) => {
+            type Stage = 'Map' | 'Encode' | 'Navigate' | 'Test' | 'Amplify' | 'Learn';
+            const isActive = project.stages?.includes(stage as Stage);
             return (
               <div key={stage} className="flex items-center">
                 <div className={`w-8 h-8 rounded-full flex items-center justify-center ${isActive ? getLoopColor(stage) : 'bg-gray-700'} text-xs`}>
                   {stage.charAt(0)}
                 </div>
                 {i < 5 && (
-                  <div className={`w-3 h-0.5 ${isActive && project.stages?.includes(['Map', 'Encode', 'Navigate', 'Test', 'Amplify', 'Learn'][i+1] as any) ? 'bg-blue-500' : 'bg-gray-700'}`}></div>
+                  <div className={`w-3 h-0.5 ${isActive && project.stages?.includes((['Map', 'Encode', 'Navigate', 'Test', 'Amplify', 'Learn'] as const)[i+1] as Stage) ? 'bg-blue-500' : 'bg-gray-700'}`}></div>
                 )}
               </div>
             );

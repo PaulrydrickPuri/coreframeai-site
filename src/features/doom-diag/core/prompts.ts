@@ -129,7 +129,7 @@ export const fewShotExamples = [
  */
 export function generatePrompt(analysisResult: AnalysisResult) {
   return {
-    model: "gpt-4o",
+    model: process.env.OPENAI_MODEL || "gpt-4o",
     messages: [
       {
         role: "system",
@@ -159,7 +159,7 @@ export function generatePrompt(analysisResult: AnalysisResult) {
  */
 export async function generateBrutalHeadlines(analysisResult: AnalysisResult & Partial<ExtractedData>) {
   // Check for OpenAI API key
-  const apiKey = process.env.OPENAI_KEY || '';
+  const apiKey = process.env.OPENAI_API_KEY || '';
   if (!apiKey) {
     throw new Error('OpenAI API key is required');
   }
