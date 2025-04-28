@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
     // Get the form data
     const formData = await request.formData();
-    const file = formData.get('file') as File;
+    const file = formData.get('file') as unknown as { arrayBuffer(): Promise<ArrayBuffer>; name: string; size: number; type: string };
     const format = formData.get('format') as string;
 
     if (!file) {

@@ -28,8 +28,8 @@ const getStagesBetween = (start: string, end: string): Array<'Map' | 'Encode' | 
     'Map', 'Encode', 'Navigate', 'Test', 'Amplify', 'Learn'
   ];
   
-  const startIndex = allStages.indexOf(start as any);
-  const endIndex = allStages.indexOf(end as any);
+  const startIndex = allStages.indexOf(start as 'Map' | 'Encode' | 'Navigate' | 'Test' | 'Amplify' | 'Learn');
+  const endIndex = allStages.indexOf(end as 'Map' | 'Encode' | 'Navigate' | 'Test' | 'Amplify' | 'Learn');
   
   if (startIndex === -1 || endIndex === -1 || startIndex > endIndex) {
     return [];
@@ -389,7 +389,8 @@ const ProjectCard: React.FC<{ project: ProjectCard }> = ({ project }) => {
                   stage === 'Navigate' ? 'bg-purple-900/50 text-purple-200' :
                   stage === 'Test' ? 'bg-violet-900/50 text-violet-200' :
                   stage === 'Amplify' ? 'bg-emerald-900/50 text-emerald-200' :
-                  'bg-teal-900/50 text-teal-200' // Learn
+                  stage === 'Learn' ? 'bg-teal-900/50 text-teal-200' :
+                  'bg-gray-900/50 text-gray-200'
                 }`}
               >
                 {stage}

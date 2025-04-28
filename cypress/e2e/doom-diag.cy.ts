@@ -1,6 +1,7 @@
 /**
  * Cypress End-to-End Tests for Brutal-Truth Diagnostics
  */
+/// <reference types="cypress" />
 
 describe('Brutal-Truth Diagnostics', () => {
   beforeEach(() => {
@@ -27,7 +28,7 @@ describe('Brutal-Truth Diagnostics', () => {
     const testFile = {
       fileName: 'sample-financial.pdf',
       fileType: 'application/pdf',
-      fileContent: Cypress.Buffer.from('test content')
+      contents: Cypress.Buffer.from('test content')
     };
     
     // Stub the processing functions to avoid actual file processing
@@ -69,7 +70,7 @@ describe('Brutal-Truth Diagnostics', () => {
     const testFile = {
       fileName: 'sample-financial.pdf',
       fileType: 'application/pdf',
-      fileContent: Cypress.Buffer.from('test content')
+      contents: Cypress.Buffer.from('test content')
     };
     
     // Stub the processing functions to avoid actual file processing
@@ -92,12 +93,12 @@ describe('Brutal-Truth Diagnostics', () => {
     cy.get('[data-testid="report-modal"]', { timeout: 15000 }).should('be.visible');
     
     // Get the initial doom days value
-    let initialDays;
-    cy.get('[data-testid="days-remaining"]')
-      .invoke('text')
-      .then((text) => {
-        initialDays = parseInt(text);
-      });
+    // Modify the modal to track days remaining
+    let initialDays = 0;
+    cy.get('[data-testid="doom-days"]').invoke('text').then((text) => {
+      const matches = text.match(/\d+/);
+      initialDays = matches ? parseInt(matches[0], 10) : 0;
+    });
     
     // Click "Mark as Done" on the first headline
     cy.get('[data-testid="headline-card"]').first().within(() => {

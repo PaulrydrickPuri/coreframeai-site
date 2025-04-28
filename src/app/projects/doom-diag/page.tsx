@@ -5,7 +5,7 @@ import { extractFinancialData } from '@/features/doom-diag/core/extractor';
 import { analyzeFinancialData } from '@/features/doom-diag/core/analyzer';
 import { generateForecast } from '@/features/doom-diag/core/forecast';
 import { generateBrutalHeadlines } from '@/features/doom-diag/core/prompts';
-import { assembleReport, markActionCompleted, exportReportToPdf, saveReportToWorkspace } from '@/features/doom-diag/core/report';
+import { assembleReport, markActionCompleted, exportReportToPdf, saveReportToWorkspace, DoomReport } from '@/features/doom-diag/core/report';
 import DropZone from '@/features/doom-diag/ui/DropZone';
 import ReportModal from '@/features/doom-diag/ui/ReportModal';
 import { motion } from 'framer-motion';
@@ -13,8 +13,9 @@ import { motion } from 'framer-motion';
 export default function DoomDiagnostics() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [report, setReport] = useState<any | null>(null);
+  const [report, setReport] = useState<DoomReport | null>(null);
   const [isReportOpen, setIsReportOpen] = useState(false);
+  const [reportElement, setReportElement] = useState<HTMLDivElement | null>(null);
   
   const handleFileAccepted = useCallback(async (file: File) => {
     setIsProcessing(true);
@@ -72,22 +73,23 @@ export default function DoomDiagnostics() {
     if (!report) return;
     
     try {
-      const pdfBlob = await exportReportToPdf(report);
+      // Pass the report element for better PDF rendering
+      const pdfBlob = await exportReportToPdf(report, reportElement);
       
       // Create a download link
       const url = URL.createObjectURL(pdfBlob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `doom-report-${new Date().toISOString().split('T')[0]}.pdf`;
+      a.download = `brutal-truth-${report.fileName.split('.')[0]}-${new Date().toISOString().split('T')[0]}.pdf`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Failed to generate PDF:', error);
-      alert('PDF export is not yet implemented');
+      alert('Failed to generate PDF. Please try again.');
     }
-  }, [report]);
+  }, [report, reportElement]);
   
   const handleSaveToWorkspace = useCallback(async () => {
     if (!report) return;
@@ -156,6 +158,7 @@ export default function DoomDiagnostics() {
           onMarkActionDone={handleMarkActionDone}
           onDownloadPdf={handleDownloadPdf}
           onSaveToWorkspace={handleSaveToWorkspace}
+          getReportElement={setReportElement}
         />
       )}
     </main>

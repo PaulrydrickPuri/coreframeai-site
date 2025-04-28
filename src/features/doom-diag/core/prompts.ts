@@ -5,6 +5,18 @@
 
 import { AnalysisResult } from './analyzer';
 
+// Extracted data interface to match extractor.ts output
+interface ExtractedData {
+  revenues: Array<{amount: number; date: string; description: string}>;
+  costs: Array<{amount: number; date: string; description: string}>;
+  dates: string[];
+  metadata?: {
+    fileName: string;
+    extractionTime: string;
+    rowCount: number;
+  };
+}
+
 // Function call schema for OpenAI
 export const brutalhHeadlinesSchema = {
   name: 'generateBrutalHeadlines',
@@ -126,9 +138,14 @@ export function generatePrompt(analysisResult: AnalysisResult) {
       {
         role: "user",
         content: JSON.stringify({
-          revenues: analysisResult.revenues || [],
-          costs: analysisResult.costs || [],
-          dates: analysisResult.dates || []
+          // Handle potential undefined properties properly with type checking
+          revenues: ('revenues' in analysisResult) ? analysisResult.revenues : [],
+          costs: ('costs' in analysisResult) ? analysisResult.costs : [],
+          dates: ('dates' in analysisResult) ? analysisResult.dates : [],
+          totalRevenue: analysisResult.totalRevenue,
+          totalCosts: analysisResult.totalCosts,
+          burnRate: analysisResult.burnRate,
+          runway: analysisResult.runway
         })
       }
     ],
@@ -140,7 +157,7 @@ export function generatePrompt(analysisResult: AnalysisResult) {
 /**
  * Call the OpenAI API to generate brutal headlines
  */
-export async function generateBrutalHeadlines(analysisResult: any) {
+export async function generateBrutalHeadlines(analysisResult: AnalysisResult & Partial<ExtractedData>) {
   // Check for OpenAI API key
   const apiKey = process.env.OPENAI_KEY || '';
   if (!apiKey) {

@@ -57,12 +57,12 @@ async function processTestFile(filePath: string) {
     
     // Read file content
     const content = fs.readFileSync(filePath);
-    const mockFile = new MockFile(content, path.basename(filePath), 'text/csv');
+    const mockFile = new MockFile(content, path.basename(filePath), 'text/csv') as unknown as File;
     
     // Extract data
     console.log('Extracting financial data...');
     const extractedData = await extractFinancialData({
-      source: mockFile as any,
+      source: mockFile,
       format: 'csv',
       maxSizeBytes: 5 * 1024 * 1024
     });

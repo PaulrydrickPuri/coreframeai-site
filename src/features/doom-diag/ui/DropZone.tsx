@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
+import { useDropzone, FileRejection, DropEvent } from 'react-dropzone';
 
 interface DropZoneProps {
   onFileAccepted: (file: File) => void;
@@ -19,13 +19,13 @@ export default function DropZone({
 }: DropZoneProps) {
   const [error, setError] = useState<string | null>(null);
   
-  const onDrop = useCallback((acceptedFiles: File[], rejectedFiles: any[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[], event: DropEvent) => {
     // Clear previous errors
     setError(null);
     
     // Handle rejected files
-    if (rejectedFiles.length > 0) {
-      const { code } = rejectedFiles[0].errors[0];
+    if (fileRejections.length > 0) {
+      const { code } = fileRejections[0].errors[0];
       if (code === 'file-too-large') {
         setError(`File is too large. Max size is ${maxSize / (1024 * 1024)}MB.`);
       } else if (code === 'file-invalid-type') {

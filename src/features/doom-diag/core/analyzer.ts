@@ -100,7 +100,12 @@ function calculateGrowthRate(items: Array<{amount: number; date: string}>): numb
 /**
  * Identify major cost leaks by category
  */
-function identifyMajorCostLeaks(costs: Array<{amount: number; description: string}>): Array<any> {
+function identifyMajorCostLeaks(costs: Array<{amount: number; description: string}>): Array<{
+  category: string;
+  amount: number;
+  percentage: number;
+  trend: 'increasing' | 'decreasing' | 'stable';
+}> {
   // Group costs by category and identify the highest ones
   // For MVP, use a simple categorization based on description keywords
   

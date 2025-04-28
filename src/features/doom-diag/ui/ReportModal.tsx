@@ -3,7 +3,7 @@
  * Display the complete doom report with download/save options
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { DoomReport } from '../core/report';
 import HeadlineCard from './HeadlineCard';
@@ -17,6 +17,7 @@ interface ReportModalProps {
   onMarkActionDone: (headlineIndex: number) => void;
   onDownloadPdf: () => void;
   onSaveToWorkspace: () => void;
+  getReportElement?: (element: HTMLDivElement | null) => void;
 }
 
 export default function ReportModal({
@@ -25,8 +26,11 @@ export default function ReportModal({
   onClose,
   onMarkActionDone,
   onDownloadPdf,
-  onSaveToWorkspace
+  onSaveToWorkspace,
+  getReportElement
 }: ReportModalProps) {
+  // Create a ref for the report content to use with PDF export
+  const reportContentRef = useRef<HTMLDivElement>(null);
   const [hasShownConfetti, setHasShownConfetti] = useState(false);
   
   // Trigger confetti on first open (once per session)
@@ -42,6 +46,13 @@ export default function ReportModal({
     }
   }, [isOpen, hasShownConfetti]);
 
+  // Provide the report content element to the parent component when available
+  useEffect(() => {
+    if (isOpen && reportContentRef.current && getReportElement) {
+      getReportElement(reportContentRef.current);
+    }
+  }, [isOpen, getReportElement]);
+  
   if (!isOpen) return null;
 
   return (
@@ -89,7 +100,7 @@ export default function ReportModal({
                 {/* Financial summary */}
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-white mb-4">Financial Overview</h3>
-                  <div className="bg-gray-800 rounded-lg p-4">
+                  <div ref={reportContentRef} className="bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-700 mb-10">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <div className="text-sm text-gray-400">Revenue</div>
