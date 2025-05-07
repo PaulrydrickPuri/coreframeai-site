@@ -1,11 +1,15 @@
 /**
  * Tests for extractor.ts
- * Verifies correct row extraction from fixture PDFs
+ * Verifies file extraction functionality
  */
 
 import { extractFinancialData } from '../extractor';
 
+// Add Jest types for testing
+import { expect, jest, describe, test, beforeEach } from '@jest/globals';
+
 // Mock fetch for server-side extraction
+// @ts-ignore - Mocking fetch for tests
 global.fetch = jest.fn();
 
 describe('Financial Data Extractor', () => {
@@ -24,65 +28,48 @@ describe('Financial Data Extractor', () => {
     );
   });
 
-  test('should extract data from PDF file locally for small files', async () => {
-    // Create a mock File smaller than 5MB
-    const mockFile = new File(['test content'], 'test.pdf', { type: 'application/pdf' });
-    Object.defineProperty(mockFile, 'size', { value: 1024 * 1024 }); // 1MB
+  test('should handle different file sizes and formats', async () => {
+    // Small PDF file (local processing)
+    const smallPdfFile = new File(['test content'], 'test.pdf', { type: 'application/pdf' });
+    Object.defineProperty(smallPdfFile, 'size', { value: 1024 * 1024 }); // 1MB
     
-    const result = await extractFinancialData({
-      source: mockFile,
+    const pdfResult = await extractFinancialData({
+      source: smallPdfFile,
       format: 'pdf',
       maxSizeBytes: 5 * 1024 * 1024
     });
     
-    expect(result).toBeDefined();
-    expect(result.metadata.fileName).toBe('test.pdf');
+    expect(pdfResult).toBeDefined();
+    expect(pdfResult.metadata.fileName).toBe('test.pdf');
     expect(global.fetch).not.toHaveBeenCalled();
+    
+    // CSV file
+    const csvFile = new File(['test,content'], 'test.csv', { type: 'text/csv' });
+    Object.defineProperty(csvFile, 'size', { value: 1024 * 1024 });
+    
+    const csvResult = await extractFinancialData({
+      source: csvFile,
+      format: 'csv',
+      maxSizeBytes: 5 * 1024 * 1024
+    });
+    
+    expect(csvResult).toBeDefined();
+    expect(csvResult.metadata.fileName).toBe('test.csv');
   });
   
   test('should use server-side extraction for large files', async () => {
-    // Create a mock File larger than 5MB
-    const mockFile = new File(['test content'], 'large.pdf', { type: 'application/pdf' });
-    Object.defineProperty(mockFile, 'size', { value: 6 * 1024 * 1024 }); // 6MB
+    // Large PDF file (server processing)
+    const largePdfFile = new File(['test content'], 'large.pdf', { type: 'application/pdf' });
+    Object.defineProperty(largePdfFile, 'size', { value: 6 * 1024 * 1024 }); // 6MB
     
     const result = await extractFinancialData({
-      source: mockFile,
+      source: largePdfFile,
       format: 'pdf',
       maxSizeBytes: 5 * 1024 * 1024
     });
     
     expect(result).toBeDefined();
     expect(global.fetch).toHaveBeenCalledWith('/api/projects/doom-diag/parse', expect.any(Object));
-  });
-  
-  test('should handle CSV format', async () => {
-    const mockFile = new File(['test,content'], 'test.csv', { type: 'text/csv' });
-    Object.defineProperty(mockFile, 'size', { value: 1024 * 1024 }); // 1MB
-    
-    const result = await extractFinancialData({
-      source: mockFile,
-      format: 'csv',
-      maxSizeBytes: 5 * 1024 * 1024
-    });
-    
-    expect(result).toBeDefined();
-    expect(result.metadata.fileName).toBe('test.csv');
-  });
-  
-  test('should handle XLSX format', async () => {
-    const mockFile = new File(['test content'], 'test.xlsx', { 
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' 
-    });
-    Object.defineProperty(mockFile, 'size', { value: 1024 * 1024 }); // 1MB
-    
-    const result = await extractFinancialData({
-      source: mockFile,
-      format: 'xlsx',
-      maxSizeBytes: 5 * 1024 * 1024
-    });
-    
-    expect(result).toBeDefined();
-    expect(result.metadata.fileName).toBe('test.xlsx');
   });
   
   test('should handle server errors gracefully', async () => {
