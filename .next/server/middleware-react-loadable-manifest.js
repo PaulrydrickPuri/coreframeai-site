@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"app/components/ClientHero.tsx -> @shared/components/organisms/Hero\":{\"id\":\"app/components/ClientHero.tsx -> @shared/components/organisms/Hero\",\"files\":[\"static/chunks/_app-pages-browser_src_shared_components_organisms_Hero_tsx.js\"]}}"
